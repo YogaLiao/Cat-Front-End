@@ -104,7 +104,9 @@ nav .nav-button:disabled {
 
 nav .logo-container {
   width: 150px;
-  margin: 15px
+  margin: 15px;
+  margin-top: 0;
+  font-size: 25px;
 }
 
 nav .logo-container .logo {
@@ -116,8 +118,28 @@ nav .logo-container .logo {
   width: 100vw;
   height: 100vh;
   position: fixed;
-  background-image: url('./images/Cat.jpeg');
-  background-position: center;
+  
+}
+
+@media (max-width: 480px) {
+  .overlay {
+    background-image: url('./images/Cat.jpeg');
+    background-position: center;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+  .overlay{
+    background-image: url('./images/Cat.jpeg');
+    background-position: center;
+  }
+}
+
+@media (min-width: 1025px) {
+  .overlay{
+    background-image: url('./images/Cat.jpeg');
+    background-position: center;
+  }
 }
 
 .home {
@@ -128,9 +150,9 @@ nav .logo-container .logo {
 .search {
   text-align: right;
   font-size: 20px;
-  margin-right: 15vw;
-  color: #9b5de5;
-  font-weight: 300;
+  margin-right: 25vw;
+  color: black;
+  font-weight: bolder;
 }
 
 

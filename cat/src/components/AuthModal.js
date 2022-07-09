@@ -59,8 +59,7 @@ function AuthModal({ setShowModal, isSignUp}) {
         <p>{error}</p>
       </form>
       <hr />
-      <h2>GET THE APP</h2>
-          AUTH MODEL
+      <h2>CATTY</h2>
     </div>
 
   )

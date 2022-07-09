@@ -3,7 +3,7 @@ import AuthModal from './AuthModal'
 import { BiSearch,BiMessageAltCheck } from 'react-icons/bi'
 import {AiOutlineHeart} from 'react-icons/ai'
 
-function Nav({authToken, setShowModal, showModal, setIsSignUp, isSignUp }) {
+function Nav({userSignedIn, setAccessToken, setUserSignedIn,setShowModal, showModal, setIsSignUp, isSignUp }) {
     const handleLogin = () => {
       setShowModal(true)
       setIsSignUp(false)
@@ -27,16 +27,19 @@ function Nav({authToken, setShowModal, showModal, setIsSignUp, isSignUp }) {
                 <h3><BiMessageAltCheck /> About Us</h3>
             </div>
             <div className='nav-buttons'>
-            {authToken ? null :  <button
+            {userSignedIn ? null :  <button
                 className="nav-button"
                 onClick={handleLogin}
                 disabled = {showModal}>Log In</button>}
             <button className = "nav-button" onClick = {handleClick}>
-              {authToken ? "Sign Out" : "Create Account"}
+              {userSignedIn ? "My Account" : "Create Account"}
                 </button>
           {showModal && <AuthModal
             setShowModal={setShowModal}
-            isSignUp = {isSignUp}
+            isSignUp={isSignUp}
+            userSignedIn={userSignedIn}
+          setUserSignedIn={setUserSignedIn}
+          setAccessToken = {setAccessToken}
           />}
             
         </div>

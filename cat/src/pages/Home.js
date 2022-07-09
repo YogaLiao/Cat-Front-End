@@ -5,9 +5,9 @@ import AuthModal from '../components/AuthModal'
 function Home() {
   const [showModal, setShowModal] = useState(false)
 const [isSignUp, setIsSignUp] = useState(true)
-        
+const [userSignedIn, setUserSignedIn] = useState(localStorage.getItem('username'))
+const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token'))
 
-    const authToken = false
 
     return (
     <div className = "overlay">
@@ -17,7 +17,9 @@ const [isSignUp, setIsSignUp] = useState(true)
           showModal={showModal}
             setIsSignUp={setIsSignUp}
                 isSignUp={isSignUp}
-            authToken = {authToken}
+          userSignedIn={userSignedIn}
+          setUserSignedIn={setUserSignedIn}
+          setAccessToken = {setAccessToken}
         />
       <div className = "home">
                 <h1 className='primary-title'>Book a</h1>

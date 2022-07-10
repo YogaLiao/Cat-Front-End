@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import Nav from '../components/Nav'
 
-function Onboarding({accessToken, userSignIn}) {
+function Onboarding({userSignedIn, setAccessToken, setUserSignedIn,setShowModal, showModal, setIsSignUp, isSignUp }) {
   const [formData, setFormData] = useState({
-    username: userSignIn,
+    username: userSignedIn,
     email: localStorage.formData.email,
     first_name: "",
     last_name: "",
@@ -35,12 +35,16 @@ function Onboarding({accessToken, userSignIn}) {
   }
   return (
     <>
+    <div className='onboarding'>
       <Nav
-        minimal={true}
-        setShowmodal={() => {}}
-        showModal={false}
-      />
-      <div className='onboarding'>
+          setShowModal={setShowModal}
+          showModal={showModal}
+          setIsSignUp={setIsSignUp}
+          isSignUp={isSignUp}
+          userSignedIn={userSignedIn}
+          setUserSignedIn={setUserSignedIn}
+          setAccessToken = {setAccessToken}
+        />
         <h2>CREATE ACCOUNT</h2>
         <form onSubmit={handleSubmit}>
           <section>

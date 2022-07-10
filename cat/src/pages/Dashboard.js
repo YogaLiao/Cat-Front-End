@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function Dashboard() {
+function Dashboard({userSignedIn, setAccessToken, setUserSignedIn,setShowModal, showModal, setIsSignUp, isSignUp }) {
   const characters = [
     {
       name: 'Richard Hendricks',

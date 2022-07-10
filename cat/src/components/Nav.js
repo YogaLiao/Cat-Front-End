@@ -1,10 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import AuthModal from './AuthModal'
 import { BiSearch,BiMessageAltCheck } from 'react-icons/bi'
-import {AiOutlineHeart} from 'react-icons/ai'
+import { AiOutlineHeart } from 'react-icons/ai'
+import SearchForm from './SearchForm'
 
 function Nav({userSignedIn, setAccessToken, setUserSignedIn,setShowModal, showModal, setIsSignUp, isSignUp }) {
-    const handleLogin = () => {
+  const [userSearch,setUserSearch] = useState(false)  
+  
+  const handleLogin = () => {
       setShowModal(true)
       setIsSignUp(false)
     }
@@ -13,6 +16,11 @@ function Nav({userSignedIn, setAccessToken, setUserSignedIn,setShowModal, showMo
       setShowModal(true)
       setIsSignUp(true)
     }
+  
+  const handleSearch = () => {
+    setUserSearch(true)
+    setShowModal(false)
+  }
 
     return (
         <nav>
@@ -22,7 +30,7 @@ function Nav({userSignedIn, setAccessToken, setUserSignedIn,setShowModal, showMo
                 </div>
             </div>
             <div className='mid-container'>
-                <h3><BiSearch /> Search Sitters&nbsp;&nbsp;</h3>
+                <h3 onClick = {handleSearch}><BiSearch /> Search Sitters&nbsp;&nbsp;</h3>
                 <h3><AiOutlineHeart /> Become a Sitter&nbsp;&nbsp;</h3>
                 <h3><BiMessageAltCheck /> About Us</h3>
             </div>
@@ -41,6 +49,8 @@ function Nav({userSignedIn, setAccessToken, setUserSignedIn,setShowModal, showMo
           setUserSignedIn={setUserSignedIn}
           setAccessToken = {setAccessToken}
           />}
+          {userSearch && <SearchForm
+            setUserSearch={setUserSearch}/>}
             
         </div>
         </nav>

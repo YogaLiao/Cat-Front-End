@@ -66,6 +66,7 @@ function AuthModal({ setShowModal, isSignUp, userSignedIn, setUserSignedIn, setA
             // add tokens to localstorage here
 
             localStorage.setItem('formData', JSON.stringify(formInfo));
+            console.log(localStorage)
             // redirect here
             navigate('/onboarding')
           }

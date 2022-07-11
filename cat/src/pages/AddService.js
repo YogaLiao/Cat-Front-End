@@ -1,23 +1,38 @@
 import React, {useState} from 'react'
 import Nav from '../components/Nav'
 import { useNavigate } from "react-router-dom"
+import { DateObject} from "react-multi-date-picker"
+import DatePanel from "react-multi-date-picker/plugins/date_panel"
 import DatePicker from "react-multi-date-picker"
+import { Calendar } from "react-multi-date-picker"
 
 function AddService({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
     let navigate = useNavigate()
+
+    const [dates, setDates] = useState(new Date())
+
     const [formData, setFormData] = useState({
         username: userSignedIn,
         displayName: userSignedIn,
         headline: "",
         service: "onboarding",
         rate: 20,
-        clientNum: 3,
-        availability: ["S", "M", "T", "W", "T", "F", "S"]
+        note:"",
+        availability: []
     })
     
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log("submitted")
+        console.log(formData)
+        console.log(dates)
+        let dateCopy = formData.availability
+        dates.map(date => {
+            date = new DateObject()
+            date = date.format();
+            dateCopy.push(date)
+        })
+        setFormData({ ...formData, availability: dateCopy })
         console.log(formData)
         navigate('/dashboard')
     }
@@ -114,30 +129,60 @@ function AddService({ userSignedIn, setAccessToken, setUserSignedIn, setShowModa
               value={formData.rate}
               onChange = {handleChange}
                   />
-             <label htmlFor='clientNum'>How many visits per day?</label>
+            <label htmlFor='note'>Any special note to your clients?</label>
             <input
-              id="clientNum"
-              type="number"
-              name="clientNum"
-            required={true}
-            placeholder="3"
-              value={formData.clientNum}
+              id="note"
+              type="text"
+              name="note"
+              placeholder=""
+              required={false}
+              value={formData.note}
               onChange = {handleChange}
-                  />
-            
+            />
             </section>
               <section>
-                  <DatePicker 
-                      weekDays={formData.availability}
-                      format="week day name: ddd (dddd), month name: MMM (MMMM) of YYYY"
-                      formattingIgnoreList={["week", "day", "name", "month", "of"]}
-                      containerStyle={{ width: "100%" }}
-                      style={{ 
-                        width: "100%", 
-                        height: "26px", 
-                        boxSizing: "border-box" 
-                      }}/>
-            </section>
+                  <label>Availability </label>
+                <p>* Select all dates you are available, you are able to adjust in your account later</p>
+              {/* <DatePicker
+            calendarPosition="bottom-left"
+            fixMainPosition
+            value={dates}
+            placeholder='Add Dates'
+                  minDate={new DateObject().toFirstOfMonth()}
+                  maxDate={new DateObject().toLastOfMonth()}
+                  onChange={dateObjects => {
+                    setDates(dateObjects)
+                    setAllDates(getAllDatesInRange(dateObjects))
+                  }}
+                  plugins={[
+                    <DatePanel eachDaysInRange />
+                  ]}
+                  /> */}
+                  {/* <DatePicker
+                    render={<Icon/>}
+                    multiple
+                    className='date'
+                    selected={dates}
+                    onChange={(item) => setDates([item.selection])}
+                    showTimeSelect
+                    dateFormat="Pp"
+                    plugins={[
+                        <DatePanel />
+                       ]}
+                  /> */}
+                  <Calendar
+                      multiple
+                      value={dates}
+                      onChange={setDates}
+                      minDate={new Date()}
+                      />
+                      {/* plugins={[
+                          <DatePanel dates />
+                      
+                      ]} */}
+                  
+              <input type="submit"></input>
+              </section>
           </form>
     </div>
   )

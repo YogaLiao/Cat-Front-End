@@ -35,7 +35,8 @@ function SearchForm({ setUserSearch }) {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(`${service} ${zipcode}`)
+      console.log(`${service} ${zipcode}`)
+      console.log(format(date[0].startDate, "MM-dd-yyyy"))
         //add api here
         //navigate here
     }

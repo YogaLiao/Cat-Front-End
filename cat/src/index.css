@@ -355,7 +355,7 @@ nav .logo-container .logo {
 }
 
 .onboarding form input[type = "radio"]:checked + label {
-  border: solid 2px rgb(221,39,22);
+  border: solid 2px #9b5de5;
 }
 
 .onboarding form input[type = "submit"]:hover {
@@ -373,7 +373,7 @@ nav .logo-container .logo {
 /* -------Second OnBoarding Page ------- */
 .add-service {
   border-top: solid 1px rgb(213,213,213);
-  background-image: url("./images//paws.jpeg");
+  background-image: url("./images/paw2.jpeg");
   background-position: right;
   background-repeat: no-repeat;
 }
@@ -382,6 +382,10 @@ nav .logo-container .logo {
   display: flex;
   justify-content: start;
   margin-left: 10%;
+}
+
+.add-service form label {
+  margin: 10px 0;
 }
 
 .add-service form section{
@@ -398,4 +402,40 @@ nav .logo-container .logo {
   font-size: 15px;
   border: solid 2px rgb(219,219,219);
   border-radius: 10px;
+}
+
+.add-service form .multiple-input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.add-service form input::-webkit-outer-spin-button,
+.add-service form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.add-service form .multiple-input-container label {
+  padding: 10px;
+  border: solid 2px rgb(144,144,144);
+  border-radius: 10px;
+  transition: all 0.3s;
+  margin-right: 10px;
+}
+
+.add-service form input[type = "radio"] {
+  display: none;
+}
+
+.add-service form input[type = "radio"]:checked + label {
+  border: solid 2px #9b5de5;
+}
+
+.add-service form input[type = "submit"]:hover {
+  background-color: rgb(235,235,235);
+}
+
+.add-service form .rmdp-input {
+  display: none;
 }

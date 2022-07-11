@@ -5,6 +5,8 @@ import { DateObject} from "react-multi-date-picker"
 import DatePanel from "react-multi-date-picker/plugins/date_panel"
 import DatePicker from "react-multi-date-picker"
 import { Calendar } from "react-multi-date-picker"
+import '@mobiscroll/react/dist/css/mobiscroll.min.css';
+import { Datepicker, Page, getJson, setOptions } from '@mobiscroll/react';
 
 function AddService({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
     let navigate = useNavigate()
@@ -160,13 +162,13 @@ function AddService({ userSignedIn, setAccessToken, setUserSignedIn, setShowModa
                   ]}
                   /> */}
                   {/* <DatePicker
-                    render={<Icon/>}
+                    // render={<Icon/>}
                     multiple
                     className='date'
                     selected={dates}
                     onChange={(item) => setDates([item.selection])}
                     showTimeSelect
-                    dateFormat="Pp"
+                      dateFormat="Pp"
                     plugins={[
                         <DatePanel />
                        ]}

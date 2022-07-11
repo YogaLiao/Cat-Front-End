@@ -25,10 +25,11 @@ function AddService({ userSignedIn, setAccessToken, setUserSignedIn, setShowModa
         e.preventDefault()
         console.log("submitted")
         console.log(formData)
-        console.log(dates)
+        console.log(dates[0].format())
+        console.log(dates[1].format())
         let dateCopy = formData.availability
         dates.map(date => {
-            date = new DateObject()
+            // date = new DateObject()
             date = date.format();
             dateCopy.push(date)
         })
@@ -173,6 +174,7 @@ function AddService({ userSignedIn, setAccessToken, setUserSignedIn, setShowModa
                   <Calendar
                       multiple
                       value={dates}
+                      selected={dates}
                       onChange={setDates}
                       minDate={new Date()}
                       />

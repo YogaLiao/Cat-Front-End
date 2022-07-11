@@ -1,6 +1,7 @@
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Onboarding from "./pages/Onboarding";
+import AddService from "./pages/AddService";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import {useState} from "react"
 
@@ -34,6 +35,16 @@ function App() {
         setIsSignUp={setIsSignUp}
         />} />
         <Route path="/onboarding" element={<Onboarding
+        userSignIn={userSignedIn}
+        setUserSignedIn={setUserSignedIn}
+        accessToken={accessToken}
+        setAccessToken={setAccessToken}
+        showModal={showModal}
+        setShowModal={setShowModal}
+        isSignUp={isSignUp}
+        setIsSignUp={setIsSignUp}
+        />} />
+        <Route path="/add" element={<AddService
         userSignIn={userSignedIn}
         setUserSignedIn={setUserSignedIn}
         accessToken={accessToken}

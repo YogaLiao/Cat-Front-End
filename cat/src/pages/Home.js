@@ -10,8 +10,8 @@ function Home({userSignedIn,setUserSignedIn,setAccessToken, showModal, setShowMo
         <Nav
           setShowModal={setShowModal}
           showModal={showModal}
-            setIsSignUp={setIsSignUp}
-                isSignUp={isSignUp}
+          setIsSignUp={setIsSignUp}
+          isSignUp={isSignUp}
           userSignedIn={userSignedIn}
           setUserSignedIn={setUserSignedIn}
           setAccessToken = {setAccessToken}

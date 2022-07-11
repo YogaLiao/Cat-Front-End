@@ -4,10 +4,13 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
-import {AiOutlineCalendar} from 'react-icons/ai'
+import { AiOutlineCalendar } from 'react-icons/ai'
+import DatePicker, { DateObject, getAllDatesInRange } from "react-multi-date-picker"
+import DatePanel from "react-multi-date-picker/plugins/date_panel"
 
 
-function SearchForm({setUserSearch}) {
+function SearchForm({ setUserSearch }) {
+    let navigate = useNavigate()
     const [service, setService] = useState("boarding")
     const [zipcode, setZipcode] = useState("75206")
     const [openDate, setOpenDate] = useState(false);
@@ -18,6 +21,9 @@ function SearchForm({setUserSearch}) {
         key: "selection",
       },
     ]);
+  
+    // const [dates, setDates] = useState([])
+    // const [allDates, setAllDates] = useState([])
 
     const handleClick = () => {
         setUserSearch(false)
@@ -30,8 +36,8 @@ function SearchForm({setUserSearch}) {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(`${service} ${zipcode}`)
-        console.log(date)
         //add api here
+        //navigate here
     }
     
   return (
@@ -80,6 +86,36 @@ function SearchForm({setUserSearch}) {
         />
               <label className="search-title">Which dates do you need?</label>
 
+              {/* <span onClick={() => setOpenDate(!openDate)}
+                  className="headerSearchText"><AiOutlineCalendar /> Add Dates:</span> */}
+           
+          {/* <DatePicker
+            range
+            calendarPosition="top-left"
+            fixMainPosition
+            value={dates}
+            placeholder='Add Dates'
+                  minDate={new DateObject().toFirstOfMonth()}
+                  maxDate={new DateObject().toLastOfMonth()}
+                  onChange={dateObjects => {
+                    setDates(dateObjects)
+                    setAllDates(getAllDatesInRange(dateObjects))
+                  }}
+                  plugins={[
+                    <DatePanel eachDaysInRange />
+                  ]}
+          /> */}
+          
+                {/* {dates.length > 1 &&
+                  <div>
+                    <h5>
+                      All Dates between {dates[0].format()} and {dates[1].format()}:
+                    </h5>
+                    <ul>
+                      {allDates.map((date, index) => <li key={index}>{date.format()}</li>)}
+                    </ul>
+                  </div>
+                } */}
               <span onClick={() => setOpenDate(!openDate)}
                   className="headerSearchText"><AiOutlineCalendar /> Add Dates: {`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
                     date[0].endDate,
@@ -93,7 +129,8 @@ function SearchForm({setUserSearch}) {
                       ranges={date}
                       className="date"
                       minDate={new Date()}
-                  />)}
+          />)}
+        
         <input className = "secondary-button" type="submit" />
       </form>
     </div>

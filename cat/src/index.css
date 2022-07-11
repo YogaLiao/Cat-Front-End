@@ -207,9 +207,9 @@ nav .logo-container .logo {
 
 
 .search-form form input {
-  padding: 15px 30px;
+  padding: 10px 25px;
   margin: 10px 0;
-  font-size: 18px;
+  font-size: 22px;
   border: solid 2px rgb(219,219,219);
   border-radius: 10px;
 }
@@ -279,7 +279,6 @@ nav .logo-container .logo {
   background-image: url("./images//paws.jpeg");
   background-position: right;
   background-repeat: no-repeat;
-
 }
 
 
@@ -368,5 +367,35 @@ nav .logo-container .logo {
 }
 
 .onboarding form .photo-container img{
-  width: 100%;
+  width: 50%;
+}
+
+/* -------Second OnBoarding Page ------- */
+.add-service {
+  border-top: solid 1px rgb(213,213,213);
+  background-image: url("./images//paws.jpeg");
+  background-position: right;
+  background-repeat: no-repeat;
+}
+
+.add-service form {
+  display: flex;
+  justify-content: start;
+  margin-left: 10%;
+}
+
+.add-service form section{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 35%;
+  text-align: start;
+}
+
+.add-service form input {
+  padding: 15px 30px;
+  margin: 10px 0;
+  font-size: 15px;
+  border: solid 2px rgb(219,219,219);
+  border-radius: 10px;
 }

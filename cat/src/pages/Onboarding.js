@@ -1,14 +1,16 @@
 import React, {useState} from 'react'
 import Nav from '../components/Nav'
+import {useNavigate} from "react-router-dom"
 
-function Onboarding({userSignedIn, setAccessToken, setUserSignedIn,setShowModal, showModal, setIsSignUp, isSignUp }) {
+function Onboarding({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
+  let navigate = useNavigate()
   const [formData, setFormData] = useState({
     username: userSignedIn,
     email: localStorage.formData.email,
     first_name: "",
     last_name: "",
-    dob_day: "",
     dob_month: "",
+    dob_day: "",
     dob_year: "",
     address: "",
     city: "",
@@ -20,8 +22,11 @@ function Onboarding({userSignedIn, setAccessToken, setUserSignedIn,setShowModal,
   })
 
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     console.log("submitted")
+    console.log(formData)
+    formData.beSitter ? navigate('/add') : navigate('/dashboard')
   }
   const handleChange = (e) => {
     console.log('e', e)
@@ -70,6 +75,15 @@ function Onboarding({userSignedIn, setAccessToken, setUserSignedIn,setShowModal,
             />
             <label>Birthday</label>
             <div className='multiple-input-container'>
+              <input
+                id="dob_month"
+                type="number"
+                name="dob_month"
+                placeholder="MM"
+                required={true}
+                value={formData.dob_month}
+                onChange = {handleChange}
+              />
             <input
               id="dob_day"
               type="number"
@@ -77,15 +91,6 @@ function Onboarding({userSignedIn, setAccessToken, setUserSignedIn,setShowModal,
               placeholder="DD"
               required={true}
               value={formData.dob_day}
-              onChange = {handleChange}
-            />
-            <input
-              id="dob_month"
-              type="number"
-              name="dob_month"
-              placeholder="MM"
-              required={true}
-              value={formData.dob_month}
               onChange = {handleChange}
             />
             <input
@@ -139,7 +144,7 @@ function Onboarding({userSignedIn, setAccessToken, setUserSignedIn,setShowModal,
               />
             </div>
             
-            {!formData.beSitter && <input type="submit"></input>}
+            
           </section>
 
           <section>
@@ -171,13 +176,14 @@ function Onboarding({userSignedIn, setAccessToken, setUserSignedIn,setShowModal,
               id="beSitter"
               type="checkbox"
               name="beSitter"
-                onChange={handleChange}
-                checked={formData.beSitter}
+              onChange={handleChange}
+              checked={formData.beSitter}
             />
-            {formData.beSitter && <input type="submit" value="Next Step"></input>}
+            {!formData.beSitter && <input type="submit"></input>}
+          {formData.beSitter && <input type="submit" value="One More Step to Become A Sitter!"></input>}
 
           </section>
-
+          
         </form>
       </div>
     </>

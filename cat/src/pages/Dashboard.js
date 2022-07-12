@@ -3,7 +3,7 @@ import AvaiCalendar from '../components/AvaiCalendar'
 import Calendar2 from '../components/Calendar2'
 import Nav from '../components/Nav'
 function Dashboard({userSignedIn, setAccessToken, setUserSignedIn,setShowModal, showModal, setIsSignUp, isSignUp }) {
-  
+  userSignedIn = localStorage.getItem('user')
 
   return (
     <div className="dashboard">

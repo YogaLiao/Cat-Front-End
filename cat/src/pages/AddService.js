@@ -5,7 +5,8 @@ import { Calendar } from "react-multi-date-picker"
 import '@mobiscroll/react/dist/css/mobiscroll.min.css';
 
 function AddService({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
-    let navigate = useNavigate()
+  let navigate = useNavigate()
+  userSignedIn = localStorage.getItem('user')
 
     const [dates, setDates] = useState(new Date())
 

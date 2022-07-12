@@ -566,3 +566,42 @@ nav .logo-container .logo {
   border-bottom-right-radius: 6px;
   background: #6f48eb;
   color: white; }
+
+  /* -------Dropdown Menu ------- */
+  .services-submenu {
+    width: 10rem;
+    position: absolute;
+    top: 60px;
+    right: 60px;
+    list-style: none;
+    text-align: start;
+    border-radius: 20px;
+    padding-inline-start: 0;
+
+  }
+  .services-submenu a {
+    color: white;
+  }
+  
+  .services-submenu li {
+    background: #9b5de5;
+    cursor: pointer;
+  }
+  
+  .services-submenu li:hover {
+    background: #6a4c93;
+  }
+  
+  .services-submenu.clicked {
+    display: none;
+  }
+  
+  .submenu-item {
+    display: block;
+    width: 10rem;
+    height: 100%;
+    text-decoration: none;
+    color: white;
+    padding: 20px;
+    margin-right: 20px;
+  }

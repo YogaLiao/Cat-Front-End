@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect} from 'react'
 import Nav from '../components/Nav'
 import AuthModal from '../components/AuthModal'
 
 function Home({userSignedIn,setUserSignedIn,setAccessToken, showModal, setShowModal, isSignUp, setIsSignUp}) {
-
+  console.log(userSignedIn)
+  userSignedIn = localStorage.getItem('user')
+  console.log(localStorage.getItem('user'))
+  console.log(userSignedIn)
 
     return (
     <div className = "overlay">
-        <Nav
+      <Nav
           setShowModal={setShowModal}
           showModal={showModal}
           setIsSignUp={setIsSignUp}

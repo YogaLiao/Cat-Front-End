@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function AuthModal({ setShowModal, isSignUp, userSignedIn, setUserSignedIn, setAccessToken}) {
+function AuthModal({ setShowModal, isSignUp, setUserSignedIn, setAccessToken }) {
   const [formInfo, setFromInfo] = useState(null)
   // const [email, setEmail] = useState(null)
   // const [password, setPassword] = useState(null)
@@ -60,13 +60,16 @@ function AuthModal({ setShowModal, isSignUp, userSignedIn, setUserSignedIn, setA
               
             console.log(data)
               
-            setUserSignedIn(data.username)
+            // setUserSignedIn(data.username)
             setShowModal(false)
               
 
             // add tokens to localstorage here
 
             localStorage.setItem('formData', JSON.stringify(formInfo));
+            localStorage.setItem('access_token', data.access)
+            localStorage.setItem('user', formInfo.username)
+            localStorage.setItem('refresh_token', data.refresh)
             console.log(localStorage)
             // redirect here
             navigate('/onboarding')
@@ -98,7 +101,8 @@ function AuthModal({ setShowModal, isSignUp, userSignedIn, setUserSignedIn, setA
           
           console.log(data)
 
-          setUserSignedIn(formInfo.username)
+          // setUserSignedIn(formInfo.username)
+          console.log(formInfo)
           setShowModal(false)
           // setUserSignedIn("jwt_user")
 

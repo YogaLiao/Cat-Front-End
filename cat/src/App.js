@@ -2,16 +2,22 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Onboarding from "./pages/Onboarding";
 import AddService from "./pages/AddService";
+import Nav from "./components/Nav";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import {useState} from "react"
+import {useState, useEffect} from "react"
 
 function App() {
-  const [userSignedIn, setUserSignedIn] = useState(localStorage.getItem('username'))
+  const [userSignedIn, setUserSignedIn] = useState(localStorage.getItem('user'))
   const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token'))
   const [showModal, setShowModal] = useState(false)
   const [isSignUp, setIsSignUp] = useState(true)
-  
+  console.log(localStorage.getItem('user'))
+  console.log(userSignedIn)
+  useEffect(() => setUserSignedIn(localStorage.getItem('user')))
+
   return (
+    <>
+      
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home
@@ -55,7 +61,8 @@ function App() {
         setIsSignUp={setIsSignUp}
         />} />
     </Routes>
-    </BrowserRouter>
+      </BrowserRouter>
+      </>
   );
 }
 

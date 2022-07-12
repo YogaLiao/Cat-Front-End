@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom"
 
 function Onboarding({ userSignedIn, accessToken, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
   let navigate = useNavigate()
+  userSignedIn = localStorage.getItem('user')
   const endpoint = 'users/'
   const [formData, setFormData] = useState({
     username: userSignedIn,

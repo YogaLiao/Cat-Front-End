@@ -2,10 +2,13 @@ import React, {useState} from 'react'
 import AuthModal from './AuthModal'
 import { BiSearch,BiMessageAltCheck } from 'react-icons/bi'
 import { AiOutlineHeart } from 'react-icons/ai'
+import { IoMdArrowDropdown } from 'react-icons/io'
 import SearchForm from './SearchForm'
+import Dropdown from './Dropdown'
 
-function Nav({userSignedIn, setAccessToken, setUserSignedIn,setShowModal, showModal, setIsSignUp, isSignUp }) {
-  const [userSearch,setUserSearch] = useState(false)  
+function Nav({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
+  const [userSearch, setUserSearch] = useState(false)  
+  const [dropdown, setDropdown] = useState(false);
   
   const handleLogin = () => {
       setShowModal(true)
@@ -39,9 +42,21 @@ function Nav({userSignedIn, setAccessToken, setUserSignedIn,setShowModal, showMo
                 className="nav-button"
                 onClick={handleLogin}
                 disabled = {showModal}>Log In</button>}
-            <button className = "nav-button" onClick = {handleClick}>
-              {userSignedIn ? "My Account" : "Create Account"}
-                </button>
+          {userSignedIn
+            ?<button
+              className="nav-button"
+              onClick={e=> setDropdown(!dropdown)}
+              >
+            {userSignedIn}&nbsp;<IoMdArrowDropdown />
+            </button>
+
+          
+          :<button className="nav-button" onClick={handleClick}>
+              Create Account
+            </button>}
+          {dropdown ? <Dropdown
+          setUserSignedIn={setUserSignedIn}
+          setAccessToken = {setAccessToken}/> : null}
           {showModal && <AuthModal
             setShowModal={setShowModal}
             isSignUp={isSignUp}

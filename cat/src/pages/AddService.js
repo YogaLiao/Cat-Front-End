@@ -1,12 +1,8 @@
 import React, {useState} from 'react'
 import Nav from '../components/Nav'
 import { useNavigate } from "react-router-dom"
-import { DateObject} from "react-multi-date-picker"
-import DatePanel from "react-multi-date-picker/plugins/date_panel"
-import DatePicker from "react-multi-date-picker"
 import { Calendar } from "react-multi-date-picker"
 import '@mobiscroll/react/dist/css/mobiscroll.min.css';
-import { Datepicker, Page, getJson, setOptions } from '@mobiscroll/react';
 
 function AddService({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
     let navigate = useNavigate()
@@ -20,7 +16,7 @@ function AddService({ userSignedIn, setAccessToken, setUserSignedIn, setShowModa
         service: "onboarding",
         rate: 20,
         note:"",
-        availability: []
+        disable: []
     })
     
     const handleSubmit = (e) => {
@@ -29,13 +25,13 @@ function AddService({ userSignedIn, setAccessToken, setUserSignedIn, setShowModa
         console.log(formData)
         console.log(dates[0].format())
         console.log(dates[1].format())
-        let dateCopy = formData.availability
+        let dateCopy = formData.disable
         dates.map(date => {
             // date = new DateObject()
             date = date.format();
             dateCopy.push(date)
         })
-        setFormData({ ...formData, availability: dateCopy })
+        setFormData({ ...formData, disable: dateCopy })
         console.log(formData)
         navigate('/dashboard')
     }
@@ -145,7 +141,7 @@ function AddService({ userSignedIn, setAccessToken, setUserSignedIn, setShowModa
             </section>
               <section>
                   <label>Availability </label>
-                <p>* Select all dates you are available, you are able to adjust in your account later</p>
+                <p>* Select all dates you are <span style={{background:"#cfbaf0"}}> not</span> available, you are able to adjust in your account later</p>
               {/* <DatePicker
             calendarPosition="bottom-left"
             fixMainPosition

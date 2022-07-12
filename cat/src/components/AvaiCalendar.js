@@ -1,130 +1,67 @@
-import dayjs from "dayjs";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
+import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import { Calendar, utils } from "react-modern-calendar-datepicker";
 
-
-
-function AvaiCalendar(userSignedIn, setAccessToken, setUserSignedIn,setShowModal, showModal, setIsSignUp, isSignUp) {
-
-  const getMonth = (month = dayjs().month()) => {
-    month = Math.floor(month);
-    const year = dayjs().year();
-    const firstDayOfTheMonth = dayjs(new Date(year, month, 1)).day();
-    let currentMonthCount = 0 - firstDayOfTheMonth;
-    const daysMatrix = new Array(5).fill([]).map(() => {
-      return new Array(7).fill(null).map(() => {
-        currentMonthCount++;
-        return dayjs(new Date(year, month, currentMonthCount));
-      });
-    });
-    return daysMatrix;
-  }
-
-  const GlobalContext = React.createContext({
-    monthIndex: 0,
-    setMonthIndex: (index) => {},
-    smallCalendarMonth: 0,
-    setSmallCalendarMonth: (index) => {},
-    daySelected: null,
-    setDaySelected: (day) => {},
-    showEventModal: false,
-    setShowEventModal: () => {},
-    dispatchCalEvent: ({ type, payload }) => {},
-    savedEvents: [],
-    selectedEvent: null,
-    setSelectedEvent: () => {},
-    setLabels: () => {},
-    labels: [],
-    updateLabel: () => {},
-    filteredEvents: [],
-  });
+function AvaiCalendar() {
+  const disable = ['2022/07/11', '2022/07/12', '2022/07/14', '2022/07/21'] // insert db data here
+  const disabledDays = []
+  disable.map(day => {
+    const d = new Date(day)
+    disabledDays.push({
+      year: d.getFullYear(),
+      month: d.getMonth() + 1,
+      day: d.getDate()
+    })
+  })
+  const defaultValue = utils().getToday()
   
-  
-  const [currentMonthIdx, setCurrentMonthIdx] = useState(
-    dayjs().month()
-  );
-  const [currentMonth, setCurrentMonth] = useState(getMonth());
-  useEffect(() => {
-    setCurrentMonth(getMonth(currentMonthIdx));
-  }, [currentMonthIdx]);
+  console.log(defaultValue)
 
-  const {
-    monthIndex,
-    setSmallCalendarMonth,
-    setDaySelected,
-    daySelected,
-  } = useContext(GlobalContext);
+  // const disabledDays = [
+  //   {
+  //     year: 2022,
+  //     month: 7,
+  //     day: 20,
+  //   },
+  //   {
+  //     year: 2022,
+  //     month: 7,
+  //     day: 21,
+  //   },
+  //   {
+  //     year: 2022,
+  //     month: 7,
+  //     day: 7,
+  //   }
+  // ];
 
-  useEffect(() => {
-    setCurrentMonthIdx(monthIndex);
-  }, [monthIndex]);
+  const [selectedDay, setSelectedDay] = useState(defaultValue);
+  const [selected, setSelected] = useState(false)
 
-  function handlePrevMonth() {
-    setCurrentMonthIdx(currentMonthIdx - 1);
-  }
-  function handleNextMonth() {
-    setCurrentMonthIdx(currentMonthIdx + 1);
-  }
-  function getDayClass(day) {
-    const format = "DD-MM-YY";
-    const nowDay = dayjs().format(format);
-    const currDay = day.format(format);
-    const slcDay = daySelected && daySelected.format(format);
-    if (nowDay === currDay) {
-      return "bg-blue-500 rounded-full text-white";
-    } else if (currDay === slcDay) {
-      return "bg-blue-100 rounded-full text-blue-600 font-bold";
-    } else {
-      return "";
-    }
-  }
+  console.log(selected)
+  console.log(selectedDay)
+
+  const handleDisabledSelect = disabledDay => {
+    console.log('Tried selecting a disabled day', disabledDay);
+  };
+
   return (
-    <div className="mt-9">
-      <header className="flex justify-between">
-        <p className="text-gray-500 font-bold">
-          {dayjs(new Date(dayjs().year(), currentMonthIdx)).format(
-            "MMMM YYYY"
-          )}
-        </p>
-        <div>
-          <button onClick={handlePrevMonth}>
-            <span className="material-icons-outlined cursor-pointer text-gray-600 mx-2">
-              chevron_left
-            </span>
-            
-          </button>
-          <button onClick={handleNextMonth}>
-            <span className="material-icons-outlined cursor-pointer text-gray-600 mx-2">
-              chevron_right
-            </span>
-            
-          </button>
-        </div>
-      </header>
-      <div className="grid grid-cols-7 grid-rows-6">
-        {currentMonth[0].map((day, i) => (
-          <span key={i} className="text-sm py-1 text-center">
-            {day.format("dd").charAt(0)}
-          </span>
-        ))}
-        {currentMonth.map((row, i) => (
-          <React.Fragment key={i}>
-            {row.map((day, idx) => (
-              <button
-                key={idx}
-                onClick={() => {
-                  setSmallCalendarMonth(currentMonthIdx);
-                  setDaySelected(day);
-                }}
-                className={`py-1 w-full ${getDayClass(day)}`}
-              >
-                <span className="text-sm">{day.format("D")}</span>
-              </button>
-            ))}
-          </React.Fragment>
-        ))}
-      </div>
-    </div>
-  );
-}   
+    <Calendar
+      value={selectedDay}
+      onChange={d => {
+        setSelectedDay(d)
+        setSelected(true)
+      }}
+      minimumDate={utils().getToday()}
+      colorPrimary="#9b5de5"
+      calendarTodayClassName="custom-today-day"
+      calendarClassName="responsive-calendar"
+      disabledDays={disabledDays} // here we pass them
+      onDisabledDayError={handleDisabledSelect} // handle error
+      shouldHighlightWeekends
+    />
+  
+  )
+}
 
 export default AvaiCalendar

@@ -61,6 +61,7 @@ function AuthModal({ setShowModal, isSignUp, userSignedIn, setUserSignedIn, setA
             console.log(data)
               
             setUserSignedIn(data.username)
+            setShowModal(false)
               
 
             // add tokens to localstorage here

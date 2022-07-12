@@ -2,8 +2,9 @@ import React, {useState} from 'react'
 import Nav from '../components/Nav'
 import {useNavigate} from "react-router-dom"
 
-function Onboarding({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
+function Onboarding({ userSignedIn, accessToken, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
   let navigate = useNavigate()
+  const endpoint = 'users/'
   const [formData, setFormData] = useState({
     username: userSignedIn,
     email: localStorage.formData.email,
@@ -15,15 +16,72 @@ function Onboarding({ userSignedIn, setAccessToken, setUserSignedIn, setShowModa
     address: "",
     city: "",
     state: "",
-    zipcode: 75206,
+    zipcode: "",
     url: "",
     about: "",
     beSitter: false
   })
 
+  const [networkErrMsg, setNetworkErrMsg] = useState(null)
+  const [clientErrMsg, setClientErrMsg] = useState(null)
+
+  const statusCodeToErr = (responseObj) => {
+      setNetworkErrMsg(`Network Error of code: ${responseObj.status}`)
+      // TODO - console log the err message
+  }
+
+  const clientFormValidation = (formData) => {
+      const blankFields = Object.entries(formData)
+                                .filter(kv => kv[1] === '')
+      if (blankFields.length > 0) {
+          setClientErrMsg(`${blankFields[0][0]} can not be blank`)
+          return false
+      }
+      setClientErrMsg(null)
+      return true
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setNetworkErrMsg(null)
+
+      if (!clientFormValidation(formData)) {
+          return
+      }
+    
+    const apiUrl = process.env.REACT_APP_API_URL
+    console.log(`fetching with token ${accessToken}`)
+
+    fetch( apiUrl + endpoint,       
+      {
+          method: 'POST',
+          headers: {
+              'Content-Type':'application/json',
+              'Authorization':` Bearer ${accessToken}`
+          },
+          body: JSON.stringify(formData)
+      }
+)
+  .then(res => {
+      if (res.ok) {
+          return res.json()
+      } else {
+          statusCodeToErr(res)
+          return Promise.resolve(null)
+      }
+  })
+  .then(data => {
+      if (!data) {
+          console.log(`problem with network request: ${networkErrMsg}`)
+      } else {
+          
+          console.log(data)
+
+          // call to refresh the list
+          // set RefreshCounter(refreshCounter + 1)
+      }
+  })
+
     console.log("submitted")
     console.log(formData)
     formData.beSitter ? navigate('/add') : navigate('/dashboard')
@@ -135,7 +193,7 @@ function Onboarding({ userSignedIn, setAccessToken, setUserSignedIn, setShowModa
             />
             <input
               id="zipcode"
-              type="number"
+              type="text"
               name="zipcode"
               placeholder="Zipcode"
               required={true}

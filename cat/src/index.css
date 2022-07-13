@@ -539,8 +539,12 @@ nav .logo-container .logo {
     justify-content: start;
     margin-left: 10%;
     padding: 20px;
+    padding-top: 0;
   }
 
+  .dashboard .main-content .top-container {
+    height: 150px;
+  }
   .dashboard .main-content .top-container .panel {
     display: flex;
     padding-left: 100px;
@@ -559,7 +563,8 @@ nav .logo-container .logo {
   }
 
   .dashboard .main-content .bottom-container .profile h1 {
-    margin-bottom: 0;
+    margin-left: 2%;
+    /* text-align: start; */
   }
 
   .dashboard img {
@@ -583,7 +588,7 @@ nav .logo-container .logo {
   }
 
   .dashboard .top-container .panel .info {
-    margin-left: 50px;
+    margin-left: 80px;
     /* border-radius: 10%;
     background: #9b5de5; */
     padding:20px
@@ -639,6 +644,11 @@ nav .logo-container .logo {
 
 .dashboard form .address-multiple-input-container input{
   width:30%;
+}
+
+.dashboard form input[id="about"] {
+  height: 40%;
+  vertical-align: top;
 }
 
 

@@ -8,7 +8,6 @@ function Onboarding({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
   const endpoint = 'users/'
   const [formData, setFormData] = useState({
     username: userSignedIn,
-    // email: localStorage.formData.email,
     first_name: "",
     last_name: "",
     dob_month: "",
@@ -219,7 +218,7 @@ function Onboarding({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
 
           <section>
 
-          <label htmlFor='About'>About Me</label>
+          <label htmlFor='about'>About Me</label>
             <input
               id='about'
               type="textbox"
@@ -228,7 +227,7 @@ function Onboarding({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
               value={formData.about}
               onChange={handleChange}
             />
-            <label htmlFor='about'>Profile Pirture</label>
+            <label htmlFor='url'>Profile Pirture</label>
             <input
               type="url"
               name="url"

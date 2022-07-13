@@ -9,7 +9,21 @@ function Dashboard({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal
   console.log(userSignedIn)
   const userEndpoint = 'users'
   const [userInfo, setUserInfo] = useState([])
-  const [formData, setFormData] = useState({})
+  const [formData, setFormData] = useState({
+    username: userSignedIn,
+    first_name: "",
+    last_name: "",
+    dob_month: "",
+    dob_day: "",
+    dob_year: "",
+    address: "",
+    city: "",
+    state: "",
+    zipcode: "",
+    cell: "",
+    url: "",
+    about: ""
+  })
 
   const handleChange = (e) => {
     console.log('e', e)
@@ -76,9 +90,9 @@ function Dashboard({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal
               id="first_name"
               type="text"
               name="first_name"
-              placeholder="First Name"
+              placeholder={userInfo.first_name}
               required={true}
-              value={userInfo.first_name}
+              value={formData.first_name}
               onChange = {handleChange}
             />
             <label htmlFor='last_name'>Last Name</label>
@@ -86,9 +100,9 @@ function Dashboard({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal
               id="last_name"
               type="text"
               name="last_name"
-              placeholder="Last Name"
+              placeholder={userInfo.last_name}
               required={true}
-              value={userInfo.last_name}
+              value={formData.last_name}
               onChange = {handleChange}
             />
             <label>Birthday</label>
@@ -97,27 +111,27 @@ function Dashboard({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal
                 id="dob_month"
                 type="number"
                 name="dob_month"
-                placeholder="MM"
+                placeholder={userInfo.dob_month}
                 required={true}
-                value={userInfo.dob_month}
+                value={formData.dob_month}
                 onChange = {handleChange}
               />
             <input
               id="dob_day"
               type="number"
               name="dob_day"
-              placeholder="DD"
+              placeholder={userInfo.dob_day}
               required={true}
-              value={userInfo.dob_day}
+              value={formData.dob_day}
               onChange = {handleChange}
             />
             <input
               id="dob_year"
               type="number"
               name="dob_year"
-              placeholder="YYYY"
+              placeholder={userInfo.dob_year}
               required={true}
-              value={userInfo.dob_year}
+              value={formData.dob_year}
               onChange = {handleChange}
               />
             </div>
@@ -127,9 +141,9 @@ function Dashboard({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal
               id="address"
               type="text"
               name="address"
-              placeholder="Street"
+              placeholder={userInfo.address}
               required={true}
-              value={userInfo.address}
+              value={formData.address}
               onChange = {handleChange}
             />
             <div className='address-multiple-input-container'>
@@ -137,58 +151,59 @@ function Dashboard({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal
               id="city"
               type="text"
               name="city"
-              placeholder="City"
+              placeholder={userInfo.city}
               required={true}
-              value={userInfo.city}
+              value={formData.city}
               onChange = {handleChange}
             />
               <input
               id="state"
               type="text"
               name="state"
-              placeholder="State"
+              placeholder={userInfo.state}
               required={true}
-              value={userInfo.state}
+              value={formData.state}
               onChange = {handleChange}
             />
             <input
               id="zipcode"
               type="text"
               name="zipcode"
-              placeholder="Zipcode"
+              placeholder={userInfo.zipcode}
               required={true}
-              value={userInfo.zipcode}
+              value={formData.zipcode}
               onChange = {handleChange}
               />
             </div>
-              </section>
-              <section>
             <label htmlFor='cell'>Phone Number</label>
             <input
               id="cell"
               type="text"
               name="cell"
-              placeholder="Cellphone Number"
+              placeholder={userInfo.cell}
               required={true}
-              value={userInfo.cell}
+              value={formData.cell}
               onChange = {handleChange}
               />
+              </section>
+              <section>
 
-          <label htmlFor='About'>About Me</label>
+          <label htmlFor='about'>About Me</label>
             <input
               id='about'
-              type="textbox"
-              name='about'
+              type="text"
+              name={userInfo.about}
               required={true}
-              value={userInfo.about}
+              value={formData.about}
               onChange={handleChange}
             />
-            <label htmlFor='about'>Profile Pirture</label>
+            <label htmlFor='url'>Profile Pirture</label>
                 <input
                   type="url"
                   name="url"
                   id="url"
-                  value={userInfo.url}
+                  placeholder={userInfo.url}
+                  value={formData.url}
               onChange={handleChange}
               required={true}
                 />

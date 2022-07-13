@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom'
 
 function AuthModal({ setShowModal, isSignUp, setUserSignedIn, setAccessToken }) {
   const [formInfo, setFromInfo] = useState(null)
+
+
+  
   // const [email, setEmail] = useState(null)
   // const [password, setPassword] = useState(null)
   // const [confirmPassword, setConfirmPassword] = useState(null)
@@ -15,18 +18,17 @@ function AuthModal({ setShowModal, isSignUp, setUserSignedIn, setAccessToken }) 
 
   const statusCodeToErr = (responseObj) => {
     if (responseObj.status == 401)
-    setError('Please check your username and/or password')
-}
-    const handleClick = () => {
+      setError('Please check your username and/or password')
+  }
+  const handleClick = () => {
     setShowModal(false)
-    }
-    const handleChange = (e) => {
-      setFromInfo({...formInfo, [e.target.id]: e.target.value})
+  }
+  const handleChange = (e) => {
+    setFromInfo({ ...formInfo, [e.target.id]: e.target.value })
   }
   
   const passwordValidation = (password, confirmPassword) => {
-    if (password !== confirmPassword) 
-    {
+    if (password !== confirmPassword) {
       setError("Passwords need to match!")
     }
   }
@@ -35,6 +37,7 @@ function AuthModal({ setShowModal, isSignUp, setUserSignedIn, setAccessToken }) 
     e.preventDefault()
     const apiUrl = process.env.REACT_APP_API_URL
     setError(null)
+    console.log(formInfo)
     if (isSignUp) {
       passwordValidation(formInfo.password, formInfo.confirmPassword)
       fetch(apiUrl + signUpEndpoint,
@@ -67,15 +70,13 @@ function AuthModal({ setShowModal, isSignUp, setUserSignedIn, setAccessToken }) 
             // add tokens to localstorage here
 
             localStorage.setItem('formData', JSON.stringify(formInfo));
-            localStorage.setItem('access_token', data.access)
-            localStorage.setItem('user', formInfo.username)
-            localStorage.setItem('refresh_token', data.refresh)
             console.log(localStorage)
             // redirect here
             navigate('/onboarding')
           }
         })
     }
+
     else {
       fetch(apiUrl + loginEndpoint,
         {
@@ -101,7 +102,7 @@ function AuthModal({ setShowModal, isSignUp, setUserSignedIn, setAccessToken }) 
           
           console.log(data)
 
-          // setUserSignedIn(formInfo.username)
+          setUserSignedIn(formInfo.username)
           console.log(formInfo)
           setShowModal(false)
           // setUserSignedIn("jwt_user")
@@ -117,6 +118,7 @@ function AuthModal({ setShowModal, isSignUp, setUserSignedIn, setAccessToken }) 
           navigate('/')
         }
       })
+      
     }
   }
   return (

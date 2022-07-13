@@ -8,7 +8,7 @@ function Onboarding({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
   const endpoint = 'users/'
   const [formData, setFormData] = useState({
     username: userSignedIn,
-    email: localStorage.formData.email,
+    // email: localStorage.formData.email,
     first_name: "",
     last_name: "",
     dob_month: "",
@@ -18,6 +18,7 @@ function Onboarding({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
     city: "",
     state: "",
     zipcode: "",
+    cell: "",
     url: "",
     about: "",
     beSitter: false
@@ -202,6 +203,16 @@ function Onboarding({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
               onChange = {handleChange}
               />
             </div>
+            <label htmlFor='cell'>Phone Number</label>
+            <input
+              id="cell"
+              type="text"
+              name="cell"
+              placeholder="Cellphone Number"
+              required={true}
+              value={formData.cell}
+              onChange = {handleChange}
+            />
             
             
           </section>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import { Calendar, utils } from "react-modern-calendar-datepicker";
 
-function AvaiCalendar() {
+function ServicePanel() {
   const disable = ['2022/07/11', '2022/07/12', '2022/07/14', '2022/07/21'] // insert db data here
   const disabledDays = []
   disable.map(day => {
@@ -64,4 +64,4 @@ function AvaiCalendar() {
   )
 }
 
-export default AvaiCalendar
+export default ServicePanel

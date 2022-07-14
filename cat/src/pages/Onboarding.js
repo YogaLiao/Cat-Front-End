@@ -83,13 +83,12 @@ function Onboarding({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
       }
   })
 
-    console.log("submitted")
     console.log(formData)
     formData.beSitter ? navigate('/add') : navigate('/dashboard')
   }
   const handleChange = (e) => {
     console.log('e', e)
-    const value = e.target.type === "checkbox" ? e.target.checked : e.target.value
+    const value = e.target.type === "checkbox" ? true : e.target.value
     const name = e.target.name
     console.log(value, name)
     setFormData((prevState) => ({
@@ -109,7 +108,7 @@ function Onboarding({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
           setUserSignedIn={setUserSignedIn}
           setAccessToken = {setAccessToken}
         />
-        <h2>CREATE ACCOUNT</h2>
+        <h1>CREATE ACCOUNT</h1>
         <form onSubmit={handleSubmit}>
           <section>
             <label htmlFor='first_name'>First Name</label>

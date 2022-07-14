@@ -443,7 +443,34 @@ nav .logo-container .logo {
 }
 
 
-/* -------Calendar ------- */
+/* -------Service Panel ------- */
+.service {
+  display: flex;
+  flex-direction: column;
+}
+
+.service .service-list {
+  background: #dfe7fd;
+  border-radius: 10%;
+}
+
+.service h1{
+  text-align: left;
+  margin-left: 20px;
+}
+
+.service .list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.service .list h3{
+  text-transform: capitalize;
+  font-weight: bold;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
 .custom-today-day {
   border: 1px solid #b8c0ff !important;
 }
@@ -454,31 +481,31 @@ nav .logo-container .logo {
 
 .responsive-calendar {
   /* by setting font-size, all the elements will correspond */
-  font-size: 10px !important; /* default to 10px */
+  font-size: 11px !important; /* default to 10px */
 }
 
 @media (max-width: 1500px) {
   .responsive-calendar {
-    font-size: 9px !important;
+    font-size: 10px !important;
   }
 }
 
 @media (max-width: 1200px) {
   .responsive-calendar {
-    font-size: 8px !important;
+    font-size: 9px !important;
   }
 }
 
 @media (max-width: 768px) {
   .responsive-calendar {
-    font-size: 7px !important;
+    font-size: 8px !important;
   }
 }
 
 /* Large screens */
 @media (min-width: 2500px) {
   .responsive-calendar {
-    font-size: 12px !important;
+    font-size: 13px !important;
   }
 }
 
@@ -544,6 +571,7 @@ nav .logo-container .logo {
 
   .dashboard .main-content .top-container {
     height: 150px;
+    padding-bottom: 10px;
   }
   .dashboard .main-content .top-container .panel {
     display: flex;
@@ -567,11 +595,17 @@ nav .logo-container .logo {
     /* text-align: start; */
   }
 
-  .dashboard img {
+.img-container {
     width: 150px;
     height: 150px;
+    overflow: hidden;
     border: solid 5px white;
     border-radius: 200%;
+  }
+
+  .dashboard img {
+    margin:auto;
+    width:150px
   }
 
   .dashboard .top-container .panel p {
@@ -588,7 +622,7 @@ nav .logo-container .logo {
   }
 
   .dashboard .top-container .panel .info {
-    margin-left: 80px;
+    margin-left: 15%;
     /* border-radius: 10%;
     background: #9b5de5; */
     padding:20px

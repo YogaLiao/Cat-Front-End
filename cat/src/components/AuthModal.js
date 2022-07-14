@@ -64,15 +64,59 @@ function AuthModal({ setShowModal, isSignUp, setUserSignedIn, setAccessToken }) 
             console.log(data)
               
             // setUserSignedIn(data.username)
-            setShowModal(false)
+            // setShowModal(false)
               
 
             // add tokens to localstorage here
 
-            localStorage.setItem('formData', JSON.stringify(formInfo));
-            console.log(localStorage)
+            // localStorage.setItem('formData', JSON.stringify(formInfo));
+            // console.log(localStorage)
+            fetch(apiUrl + loginEndpoint,
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  username: formInfo.username,
+                  password: formInfo.password
+                })
+              }
+            )
+            .then(res => {
+              if (res.ok) {
+                return res.json()
+              } else {
+                statusCodeToErr(res)
+                return Promise.resolve(null)
+              }
+            })
+            .then(data => {
+              if (!data) {
+                console.log(`problem with network request: ${error}`)
+              } else {
+                
+                console.log(data)
+      
+                setUserSignedIn(formInfo.username)
+                console.log(formInfo)
+                setShowModal(false)
+                // setUserSignedIn("jwt_user")
+      
+                // add tokens to localstorage here
+                setAccessToken(data.access)
+      
+                localStorage.setItem('access_token', data.access)
+                localStorage.setItem('user', formInfo.username)
+                localStorage.setItem('refresh_token', data.refresh)
+                // redirect here
+                console.log(localStorage)
+                navigate('/onboarding')
+
+              }
+            })
+
             // redirect here
-            navigate('/onboarding')
           }
         })
     }

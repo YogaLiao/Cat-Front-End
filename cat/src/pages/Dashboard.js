@@ -63,8 +63,10 @@ function Dashboard({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal
             <div>
               {!userInfo
                 ? "Loading"
-                :<div className="panel">
-                <img src={userInfo.url}></img>
+              : <div className="panel">
+                <div className = 'img-container'>
+                  <img src={userInfo.url}></img>
+                </div>
                   <div className='info'>
                   <p className = "name">{userInfo.first_name} {userInfo.last_name}</p>
                   <p>{userInfo.city}, {userInfo.state}</p>
@@ -75,7 +77,6 @@ function Dashboard({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal
         </section>
         <section className='bottom-container'>
             <div className="servicePanel">
-              <h1>Service List</h1>
               <ServicePanel
                 userInfo = {userInfo}
               />

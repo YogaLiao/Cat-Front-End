@@ -1,9 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import "@progress/kendo-theme-default/dist/all.css"; 
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import { Calendar, utils } from "react-modern-calendar-datepicker";
+import { DropDownList } from "@progress/kendo-react-dropdowns";
 
 function ServicePanel() {
-  const disable = ['2022/07/11', '2022/07/12', '2022/07/14', '2022/07/21'] // insert db data here
+  const serviceInfo = [{
+    username: 'admin', displayName: 'admin', headline: 'Your pets are mine', service: 'housesitting', rate: 20,
+    service: "housesitting", note:'No', disable: ['2022/07/13', '2022/07/14', '2022/07/15', '2022/07/19', '2022/07/18']
+  },
+  {
+    username: 'admin', displayName: 'admin', headline: 'Your pets are mine', service: 'boarding', rate: 30,
+    service: "onboarding", note:'No', disable: ['2022/07/18', '2022/07/19', '2022/07/20', '2022/07/22']
+  }]
+  const [type, setType] = useState(serviceInfo[0].service)
+  const types = []
+  serviceInfo.map(x => types.push(x.service))
+  const filteredData = useMemo(()=> serviceInfo.filter(x => x.service == type))
+  const disable = filteredData[0].disable // insert db data here
   const disabledDays = []
   disable.map(day => {
     const d = new Date(day)
@@ -17,23 +31,6 @@ function ServicePanel() {
   
   console.log(defaultValue)
 
-  // const disabledDays = [
-  //   {
-  //     year: 2022,
-  //     month: 7,
-  //     day: 20,
-  //   },
-  //   {
-  //     year: 2022,
-  //     month: 7,
-  //     day: 21,
-  //   },
-  //   {
-  //     year: 2022,
-  //     month: 7,
-  //     day: 7,
-  //   }
-  // ];
 
   const [selectedDay, setSelectedDay] = useState(defaultValue);
   const [selected, setSelected] = useState(false)
@@ -46,6 +43,27 @@ function ServicePanel() {
   };
 
   return (
+    <div className="service">
+      <div className="service-list">
+        <h1>Services</h1>
+        {serviceInfo.map(x => (
+          <div className="list">
+            <div className="left">
+              <h3>{x.service}</h3>
+            </div>
+            <div className="right">
+              <h3>$ {x.rate}</h3>
+              <p>per visit</p>
+            </div>
+        </div>
+        ))}
+        
+        
+      </div>
+      <h1>Availability</h1>
+      <form>
+        <DropDownList className="k-form k-mb-4" data={types} onChange={e => setType(e.value)} />
+          </form>
     <Calendar
       value={selectedDay}
       onChange={d => {
@@ -59,7 +77,8 @@ function ServicePanel() {
       disabledDays={disabledDays} // here we pass them
       onDisabledDayError={handleDisabledSelect} // handle error
       shouldHighlightWeekends
-    />
+      />
+      </div>
   
   )
 }

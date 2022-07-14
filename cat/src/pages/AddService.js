@@ -4,14 +4,23 @@ import { useNavigate } from "react-router-dom"
 import { Calendar } from "react-multi-date-picker"
 import '@mobiscroll/react/dist/css/mobiscroll.min.css';
 
-function AddService({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
+function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
   let navigate = useNavigate()
   userSignedIn = localStorage.getItem('user')
+  const endpoint = "services/"
+
+  const [networkErrMsg, setNetworkErrMsg] = useState(null)
+  const [clientErrMsg, setClientErrMsg] = useState(null)
+
+  const statusCodeToErr = (responseObj) => {
+      setNetworkErrMsg(`Network Error of code: ${responseObj.status}`)
+      // TODO - console log the err message
+  }
 
     const [dates, setDates] = useState(new Date())
 
     const [formData, setFormData] = useState({
-        username: userSignedIn,
+        user: userSignedIn,
         displayName: userSignedIn,
         headline: "",
         service: "onboarding",
@@ -21,7 +30,8 @@ function AddService({ userSignedIn, setAccessToken, setUserSignedIn, setShowModa
     })
     
     const handleSubmit = (e) => {
-        e.preventDefault()
+      e.preventDefault()
+      setNetworkErrMsg(null)
         console.log("submitted")
         console.log(formData)
         console.log(dates[0].format())
@@ -33,7 +43,40 @@ function AddService({ userSignedIn, setAccessToken, setUserSignedIn, setShowModa
             dateCopy.push(date)
         })
         setFormData({ ...formData, disable: dateCopy })
-        console.log(formData)
+      console.log(formData)
+      const apiUrl = process.env.REACT_APP_API_URL
+    console.log(`fetching with token ${accessToken}`)
+
+    fetch( apiUrl + endpoint,       
+      {
+          method: 'POST',
+          headers: {
+              'Content-Type':'application/json',
+              'Authorization':` Bearer ${accessToken}`
+          },
+          body: JSON.stringify(formData)
+      }
+)
+  .then(res => {
+      if (res.ok) {
+          return res.json()
+      } else {
+          statusCodeToErr(res)
+          return Promise.resolve(null)
+      }
+  })
+  .then(data => {
+      if (!data) {
+          console.log(`problem with network request: ${networkErrMsg}`)
+      } else {
+          
+          console.log(data)
+
+          // call to refresh the list
+          // set RefreshCounter(refreshCounter + 1)
+      }
+  })
+
         navigate('/dashboard')
     }
     
@@ -66,7 +109,7 @@ function AddService({ userSignedIn, setAccessToken, setUserSignedIn, setShowModa
           setUserSignedIn={setUserSignedIn}
           setAccessToken = {setAccessToken}
           />
-          <h2>Complete below Information to Start</h2>
+          <h1>Start being a Pet Sitter Now</h1>
           <form onSubmit={handleSubmit}>
         <section>
           <label htmlFor='displayName'>Display name </label>

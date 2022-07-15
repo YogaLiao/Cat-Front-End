@@ -451,7 +451,7 @@ nav .logo-container .logo {
 
 .service .service-list {
   background: #dfe7fd;
-  border-radius: 10%;
+  border-radius: 5%;
 }
 
 .service h1{
@@ -614,7 +614,7 @@ nav .logo-container .logo {
     font-size: 20px;
     margin-top: 0px;
     margin-bottom: 0;
-    font-family: 'Cinzel', serif;  
+    font-family: 'Cinzel', serif;
   }
 
   .dashboard .top-container .panel .name {
@@ -680,10 +680,22 @@ nav .logo-container .logo {
   width:30%;
 }
 
-.dashboard form input[id="about"] {
-  height: 40%;
-  vertical-align: top;
+.dashboard .photo-container img{
+  width: 50%;
+  margin-bottom: 10%;
 }
+
+.dashboard .delete {
+  background: #ef233c;
+  color: white;
+  color:#fff;
+  text-transform: uppercase;
+  font-size: 15px;
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: none;
+}
+
 
 
   

@@ -31,31 +31,31 @@ function ServicePanel({userSignedIn}) {
           console.log(data.data)
           let info = data.data.filter(x => x.username == userSignedIn)
           console.log(info)
-          console.log(data.data[0].username)
           setServiceInfo(info[0].services)
+          console.log(serviceInfo)
           // setType(serviceInfo.service)
           // const filteredData = serviceInfo.filter(x => x.service == type)
           // setDisable(filteredData.disable )
-          let copy = []
-          serviceInfo.map(x => copy.push(x.service))
-          setTypes(copy)
-          setType(serviceInfo[0].service)
-          const disable = serviceInfo[0].disable
-          let copy1 = []
-          disable.map(day => {
-            const d = new Date(day)
-            copy1.push({
-              year: d.getFullYear(),
-              month: d.getMonth() + 1,
-              day: d.getDate()
+          if (serviceInfo) {
+            let copy = []
+            serviceInfo.map(x => copy.push(x.service))
+            setTypes(copy)
+            console.log(types)
+            setType(serviceInfo[0].service)
+            const disable = serviceInfo[0].disable
+            let copy1 = []
+            disable.map(day => {
+              const d = new Date(day)
+              copy1.push({
+                year: d.getFullYear(),
+                month: d.getMonth() + 1,
+                day: d.getDate()
+              })
             })
-          })
-          setDisabledDays(copy1)
-        })
-      
-          
-        
-    }, [])
+            setDisabledDays(copy1)
+          }
+        })}
+    , [])
   
 
     const handleChange = (e) => {
@@ -115,19 +115,23 @@ function ServicePanel({userSignedIn}) {
           {serviceInfo.length > 0
           ? < div className="service-list">
           <h1>Services</h1>
-          
+          <form>
         
           {serviceInfo.map(x => (
             <div className="list">
               <div className="left">
                 <h3>{x.service}</h3>
               </div>
-              <div className="right">
+              <div className="mid">
                 <h3>$ {x.rate}</h3>
                 <p>per visit</p>
               </div>
+              <div className="del">
+                <h3> X </h3>
+              </div>
             </div>
           ))}
+                </form>
         
         
             </div>

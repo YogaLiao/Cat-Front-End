@@ -37,6 +37,10 @@ function SearchForm({ setUserSearch }) {
         e.preventDefault()
       console.log(`${service} ${zipcode}`)
       console.log(format(date[0].startDate, "MM-dd-yyyy"))
+      localStorage.setItem('service', service)
+      localStorage.setItem('zipcode', zipcode)
+      localStorage.setItem('start_date', date[0].startDate)
+      localStorage.setItem('end_date', date[0].endDate)
         //add api here
         //navigate here
     }

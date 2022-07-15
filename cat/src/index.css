@@ -696,6 +696,134 @@ nav .logo-container .logo {
   border: none;
 }
 
+/* -------Result Page ------- */
+.results {
+  border-top: solid 1px rgb(213,213,213);
+  /* background-image: url("./images/background.jpeg");
+  background-position: center;
+  background-repeat: no-repeat; */
+  display: flex;
+  flex-direction: column;
+}
+
+.results .main-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  margin-left: 10%;
+  padding: 20px;
+  padding-top: 0;
+}
+
+.results .main-content .left-container {
+  border: solid 2px gainsboro;
+  border-radius: 10px;
+}
+
+.filter .service {
+  /* position: absolute;
+  left: 0;
+  right: 0; */
+  top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  width:400px;
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.filter .service form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.filter .service form input {
+  padding: 10px 25px;
+  margin: 10px 0;
+  font-size: 18px;
+  border: solid 2px rgb(219,219,219);
+  border-radius: 10px;
+  width:300px;
+}
+
+.filter .service form input[type="submit"] {
+  margin-left: auto;
+  margin-right: auto;
+  width:200px;
+}
+
+
+.filter .service form input::-webkit-outer-spin-button,
+.filter .service form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.filter .service .search-title {
+  font-size: 20px;
+}
+
+.filter .service form label {
+  margin: 10px 0;
+  font-size: 18px;
+  text-align: start;
+}
+.filter .service form .multiple-input-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.filter .service form .multiple-input-container input {
+  margin-right: 10px;
+}
+
+.filter .service form .multiple-input-container label {
+  padding: 10px;
+  border: solid 2px rgb(144,144,144);
+  border-radius: 10px;
+  transition: all 0.3s;
+  margin-right: 10px;
+}
+
+.filter .service form input[type = "radio"] {
+  display: none;
+}
+.filter .service form input[type = "number"] {
+  width: 10%;
+}
+
+.filter .service form input[type = "radio"]:checked + label {
+  border: solid 2px rgb(221,39,22);
+}
+
+.filter .service form input[type = "submit"]:hover {
+  background-color: rgb(235,235,235);
+}
+
+.filter .service form input[type = "active"]:hover {
+  background-color: rgb(226,115,155);
+}
+
+.filter .service .headerSearchText {
+  padding: 15px 30px;
+  margin: 10px 0;
+  font-size: 15px;
+  text-align: start;
+  border: solid 2px rgb(219,219,219);
+  border-radius: 10px;
+}
+.filter .service .date input{
+  display: none;
+}
+
+.filter .service .secondary-button {
+  justify-content: center;
+}
+
+
 
 
   

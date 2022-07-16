@@ -39,20 +39,21 @@ function ServicePanel({userSignedIn}) {
           if (serviceInfo) {
             let copy = []
             serviceInfo.map(x => copy.push(x.service))
+            console.log(copy)
             setTypes(copy)
             console.log(types)
-            setType(serviceInfo[0].service)
-            const disable = serviceInfo[0].disable
-            let copy1 = []
-            disable.map(day => {
-              const d = new Date(day)
-              copy1.push({
-                year: d.getFullYear(),
-                month: d.getMonth() + 1,
-                day: d.getDate()
-              })
-            })
-            setDisabledDays(copy1)
+            // setType(serviceInfo[0].service)
+            // const disable = serviceInfo[0].disable
+            // let copy1 = []
+            // disable.map(day => {
+            //   const d = new Date(day)
+            //   copy1.push({
+            //     year: d.getFullYear(),
+            //     month: d.getMonth() + 1,
+            //     day: d.getDate()
+            //   })
+            // })
+            // setDisabledDays(copy1)
           }
         })}
     , [])
@@ -74,8 +75,8 @@ function ServicePanel({userSignedIn}) {
     setDisabledDays(copy)
     }
  
-  console.log(serviceInfo)
-  console.log(types)
+  // console.log(serviceInfo)
+  // console.log(types)
   
     
     // const filteredData = useMemo(() => serviceInfo.filter(x => x.service == type))

@@ -3,10 +3,12 @@ import Nav from '../components/Nav'
 import { useNavigate } from "react-router-dom"
 import { Calendar } from "react-multi-date-picker"
 import '@mobiscroll/react/dist/css/mobiscroll.min.css';
+import axios from 'axios';
 
 function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
   let navigate = useNavigate()
   userSignedIn = localStorage.getItem('user')
+  const [checkData, setCheckData] = useState(true)
   const endpoint = "services/"
 
   const [networkErrMsg, setNetworkErrMsg] = useState(null)
@@ -16,7 +18,26 @@ function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
       setNetworkErrMsg(`Network Error of code: ${responseObj.status}`)
       // TODO - console log the err message
   }
-
+  const checkInput = (formData) => {
+    const checkPoint = `services/?service=${formData.service}`
+    axios.get(process.env.REACT_APP_API_URL + checkPoint)
+      .then(data => {
+        console.log(data.data)
+        if (data.data.length > 0) {
+          let info = data.data.filter(x => x.user == userSignedIn)
+          if (info.length > 0) {
+            setClientErrMsg("This service has already been listed")
+            console.log("here")
+            setCheckData(false)
+          }
+        }
+        setClientErrMsg(null)
+          console.log('yah')
+        
+      })
+    return checkData
+  }
+  
     const [dates, setDates] = useState(new Date())
 
     const [formData, setFormData] = useState({
@@ -29,56 +50,60 @@ function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
         disable: []
     })
     
-    const handleSubmit = (e) => {
-      e.preventDefault()
-      setNetworkErrMsg(null)
-        console.log("submitted")
-        console.log(formData)
-        console.log(dates[0].format())
-        console.log(dates[1].format())
-        let dateCopy = formData.disable
-        dates.map(date => {
-            // date = new DateObject()
-            date = date.format();
-            dateCopy.push(date)
-        })
-        setFormData({ ...formData, disable: dateCopy })
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setNetworkErrMsg(null)
+    console.log(formData)
+    console.log(checkInput(formData))
+    if (checkInput(formData)) {
+      console.log("submitted")
+      console.log(formData)
+      console.log(dates[0].format())
+      console.log(dates[1].format())
+      let dateCopy = formData.disable
+      dates.map(date => {
+        // date = new DateObject()
+        date = date.format();
+        dateCopy.push(date)
+      })
+      setFormData({ ...formData, disable: dateCopy })
       console.log(formData)
       const apiUrl = process.env.REACT_APP_API_URL
-    console.log(`fetching with token ${accessToken}`)
+      console.log(`fetching with token ${accessToken}`)
 
-    fetch( apiUrl + endpoint,       
-      {
+      fetch(apiUrl + endpoint,
+        {
           method: 'POST',
           headers: {
-              'Content-Type':'application/json',
-              'Authorization':` Bearer ${accessToken}`
+            'Content-Type': 'application/json',
+            'Authorization': ` Bearer ${accessToken}`
           },
           body: JSON.stringify(formData)
-      }
-)
-  .then(res => {
-      if (res.ok) {
-          return res.json()
-      } else {
-          statusCodeToErr(res)
-          return Promise.resolve(null)
-      }
-  })
-  .then(data => {
-      if (!data) {
-          console.log(`problem with network request: ${networkErrMsg}`)
-      } else {
+        }
+      )
+        .then(res => {
+          if (res.ok) {
+            return res.json()
+          } else {
+            statusCodeToErr(res)
+            return Promise.resolve(null)
+          }
+        })
+        .then(data => {
+          if (!data) {
+            console.log(`problem with network request: ${networkErrMsg}`)
+          } else {
           
-          console.log(data)
+            console.log(data)
 
-          // call to refresh the list
-          // set RefreshCounter(refreshCounter + 1)
-      }
-  })
+            // call to refresh the list
+            // set RefreshCounter(refreshCounter + 1)
+          }
+        })
 
-        navigate('/dashboard')
+      navigate('/dashboard')
     }
+  }
     
     const handleChange = (e) => {
         console.log('e', e)
@@ -109,7 +134,7 @@ function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
           setUserSignedIn={setUserSignedIn}
           setAccessToken = {setAccessToken}
           />
-          <h1>Start being a Pet Sitter Now</h1>
+          <h1>Adding Your Service</h1>
           <form onSubmit={handleSubmit}>
         <section>
           <label htmlFor='displayName'>Display name </label>
@@ -161,7 +186,8 @@ function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
                 checked={formData.service === "dropin"}
               />
               <label htmlFor='dropin'>Drop-In Visits</label>
-                  </div>
+          </div>
+          <p>{clientErrMsg}</p>
             <label htmlFor='rate'>Rate ($/each visit)</label>
             <input
               id="rate"
@@ -171,7 +197,8 @@ function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
             placeholder="20"
               value={formData.rate}
               onChange = {handleChange}
-                  />
+          />
+          
             <label htmlFor='note'>Any special note to your clients?</label>
             <input
               id="note"

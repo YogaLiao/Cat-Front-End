@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function Dropdown({setUserSignedIn, setAccessToken}) {
+function Dropdown({ setUserSignedIn, setAccessToken }) {
+  const navigate = useNavigate()
   const [dropdown, setDropdown] = useState(false);
   return (
     <>
@@ -26,9 +27,10 @@ function Dropdown({setUserSignedIn, setAccessToken}) {
                         localStorage.removeItem('accessToken')
                         localStorage.removeItem('refreshToken')
                         localStorage.removeItem('user')
-                        localStorage.clear()
-                      console.log(localStorage)
+                    localStorage.clear()
                     
+                      console.log(localStorage)
+                    navigate('/')
                   }}
               >
                 Log Out

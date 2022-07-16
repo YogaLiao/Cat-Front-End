@@ -46,45 +46,47 @@ function Onboarding({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
     e.preventDefault()
     setNetworkErrMsg(null)
 
-      if (!clientFormValidation(formData)) {
-          return
-      }
+    if (!clientFormValidation(formData)) {
+      return
+    }
     
-    const apiUrl = process.env.REACT_APP_API_URL
-    console.log(`fetching with token ${accessToken}`)
+    else {
+      const apiUrl = process.env.REACT_APP_API_URL
+      console.log(`fetching with token ${accessToken}`)
 
-    fetch( apiUrl + endpoint,       
-      {
+      fetch(apiUrl + endpoint,
+        {
           method: 'POST',
           headers: {
-              'Content-Type':'application/json',
-              'Authorization':` Bearer ${accessToken}`
+            'Content-Type': 'application/json',
+            'Authorization': ` Bearer ${accessToken}`
           },
           body: JSON.stringify(formData)
-      }
-)
-  .then(res => {
-      if (res.ok) {
-          return res.json()
-      } else {
-          statusCodeToErr(res)
-          return Promise.resolve(null)
-      }
-  })
-  .then(data => {
-      if (!data) {
-          console.log(`problem with network request: ${networkErrMsg}`)
-      } else {
+        }
+      )
+        .then(res => {
+          if (res.ok) {
+            return res.json()
+          } else {
+            statusCodeToErr(res)
+            return Promise.resolve(null)
+          }
+        })
+        .then(data => {
+          if (!data) {
+            console.log(`problem with network request: ${networkErrMsg}`)
+          } else {
           
-          console.log(data)
+            console.log(data)
 
-          // call to refresh the list
-          // set RefreshCounter(refreshCounter + 1)
-      }
-  })
+            // call to refresh the list
+            // set RefreshCounter(refreshCounter + 1)
+          }
+        })
 
-    console.log(formData)
-    formData.beSitter ? navigate('/add') : navigate('/dashboard')
+      console.log(formData)
+      formData.beSitter ? navigate('/add') : navigate('/dashboard')
+    }
   }
   const handleChange = (e) => {
     console.log('e', e)

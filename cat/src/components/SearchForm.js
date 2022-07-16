@@ -10,7 +10,7 @@ import DatePanel from "react-multi-date-picker/plugins/date_panel"
 
 
 function SearchForm({ setUserSearch }) {
-    let navigate = useNavigate()
+    const navigate = useNavigate()
     const [service, setService] = useState("boarding")
     const [zipcode, setZipcode] = useState("75206")
     const [openDate, setOpenDate] = useState(false);
@@ -41,6 +41,8 @@ function SearchForm({ setUserSearch }) {
       localStorage.setItem('zipcode', zipcode)
       localStorage.setItem('start_date', date[0].startDate)
       localStorage.setItem('end_date', date[0].endDate)
+      navigate('/results')
+
         //add api here
         //navigate here
     }

@@ -290,7 +290,7 @@ console.log(userInfo)
                   <input type="submit" value = "Update Profile"></input>
                   </section>
               </form>
-                  <input type="submit" value = "Delete Account" className='delete'></input>
+                  {/* <input type="submit" value = "Delete Account" className='delete'></input> */}
             </div>
           </section>
         </div>

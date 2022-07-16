@@ -442,6 +442,10 @@ nav .logo-container .logo {
   display: none;
 }
 
+.add-service form p{
+  color: #ef233c;
+}
+
 
 /* -------Service Panel ------- */
 .service {

@@ -18,24 +18,26 @@ function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
       setNetworkErrMsg(`Network Error of code: ${responseObj.status}`)
       // TODO - console log the err message
   }
-  const checkInput = (formData) => {
-    const checkPoint = `services/?service=${formData.service}`
+  const checkInput = (value) => {
+    const checkPoint = `search/services/?service=${value}`
     axios.get(process.env.REACT_APP_API_URL + checkPoint)
       .then(data => {
         console.log(data.data)
-        if (data.data.length > 0) {
-          let info = data.data.filter(x => x.user == userSignedIn)
-          if (info.length > 0) {
-            setClientErrMsg("This service has already been listed")
-            console.log("here")
-            setCheckData(false)
-          }
+        let info = data.data.filter(x => x.username === userSignedIn)
+        console.log(info)
+        if (data.data.filter(x => x.username === userSignedIn).length > 0) {
+          setClientErrMsg("This service has already been listed")
+          console.log("here")
+          return false
         }
-        setClientErrMsg(null)
+        
+        else {
+          setClientErrMsg(null)
           console.log('yah')
+          return true
+        }
         
       })
-    return checkData
   }
   
     const [dates, setDates] = useState(new Date())
@@ -44,7 +46,7 @@ function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
         user: userSignedIn,
         displayName: userSignedIn,
         headline: "",
-        service: "onboarding",
+        service: "",
         rate: 20,
         note:"",
         disable: []
@@ -54,12 +56,10 @@ function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
     e.preventDefault()
     setNetworkErrMsg(null)
     console.log(formData)
-    console.log(checkInput(formData))
-    if (checkInput(formData)) {
       console.log("submitted")
       console.log(formData)
-      console.log(dates[0].format())
-      console.log(dates[1].format())
+      // console.log(dates[0].format())
+      // console.log(dates[1].format())
       let dateCopy = formData.disable
       dates.map(date => {
         // date = new DateObject()
@@ -102,7 +102,7 @@ function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
         })
 
       navigate('/dashboard')
-    }
+    
   }
     
     const handleChange = (e) => {
@@ -116,12 +116,21 @@ function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
         }))
       }
 
-    const handleCheck = (e) => {
-        setFormData({ ...formData, service: e.target.value })
+  const handleCheck = (e) => {
+    setFormData({ ...formData, service: e.target.value })
+    console.log(e.target.value)
+      if (!checkInput(e.target.value))
+        {
         console.log(formData.service)
+        console.log("yes")
+      }
+      else {
+        console.log(formData.service)
+        console.log("no")
+    }
     }
         
-
+console.log(formData.service)
 
   return (
       <div className="add-service">
@@ -176,7 +185,7 @@ function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
                 onChange={handleCheck}
                 checked={formData.service === "housesitting"}
               />
-              <label htmlFor='housesitting'>House Setting</label>
+              <label htmlFor='housesitting'>House Sitting</label>
               <input
               id="dropin"
               type="radio"

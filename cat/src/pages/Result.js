@@ -12,14 +12,29 @@ function Result({ accessToken, userSignedIn, setAccessToken, setUserSignedIn, se
     const [service, setService] = useState(localStorage.getItem('service'))
     const [serviceInfo, setServiceInfo] = useState([])
     const [zipcode, setZipcode] = useState(localStorage.getItem('zipcode'))
-    const [rate, setRate] = useState(0)
-    const endpoint = `services/?service=${service}`
+    const start_date = localStorage.getItem('start_date')
+    const end_date = localStorage.getItem('end_date')
 
+    const [rate, setRate] = useState(0)
+    const endpoint = `search/services/?service=${service}`
+
+    // const compareDates = (arr) => {
+    //     if (arr.map(x => {
+    //         new Date(x).valueOf() <= new Date(end_date).valueOf() && new Date(x).valueOf() >=new Date(start_date).valueOf() 
+    //     })) {
+    //         return false
+    //     }
+    //     else {return true}
+    // }
+    console.log(new Date('2022/07/21').valueOf() >= new Date(start_date).valueOf())
+    console.log(new Date('2022/07/21').valueOf())
+    console.log(new Date(start_date).valueOf())
+    // console.log(compareDates(['2022/07/14', '2022/07/18', '2022/07/19', '2022/07/21']))
     useEffect(() => {
         axios.get(process.env.REACT_APP_API_URL + endpoint)
             .then(data => {
                 let info = data.data.filter(x => {
-                    return x.username != userSignedIn && x.zipcode.slice(0,3) == zipcode.slice(0,3)
+                    return (x.username != userSignedIn && x.zipcode.slice(0,3) == zipcode.slice(0,3))
                 })
                 setServiceInfo(info)
             })

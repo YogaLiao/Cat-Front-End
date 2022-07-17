@@ -53,7 +53,7 @@ a{
   text-transform: capitalize;
   padding: 12px 25px;
   border-radius: 30px;
-  border: solid 2px rgb(48,48,48);
+  border: solid 2px #9b5de5;
   margin: 6px;
 }
 
@@ -465,14 +465,31 @@ nav .logo-container .logo {
 
 .service .list {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  /* padding: 10px; */
+  margin: 5px;
+  background-color: #cdb4db;
+  border-radius: 10px;
+  
+}
+
+.service .list .left {
+  padding-left: 40px;
+}
+
+.service .list .right {
+  padding-right: 30px;
 }
 
 .service .list h3{
   text-transform: capitalize;
   font-weight: bold;
   margin-bottom: 0;
-  margin-top: 0;
+  margin-top: 8px;
+}
+
+.service .list p {
+  margin-bottom: 0;
 }
 
 .custom-today-day {
@@ -827,7 +844,202 @@ nav .logo-container .logo {
   justify-content: center;
 }
 
+/* -------Edit Service Page ------- */
 
+.edit-service {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 360px;
+  height: 450px;
+  background: #dee2ff;
+  border-radius: 10px;
+  padding: 40px;
+}
+
+.edit-service .close-icon {
+  float: right;
+}
+
+.edit-service form {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-service form input {
+  padding: 8px;
+  margin:0px;
+  font-size: 15px;
+}
+
+.edit-service form label {
+  text-align: left;
+}
+
+.edit-service form input[type="submit"] {
+  padding: 8px;
+  margin:15px;
+  font-size: 20px;
+}
+
+/* -------Service Detail ------- */
+.detail {
+  border-top: solid 1px rgb(213,213,213);
+  /* background-image: url("./images/background.jpeg");
+  background-position: center;
+  background-repeat: no-repeat; */
+  display: flex;
+  flex-direction: column;
+}
+
+.detail .main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin-left: 10%;
+  padding: 20px;
+  padding-top: 0;
+}
+
+.detail .main-content .top-container {
+  height: 150px;
+  padding-bottom: 10px;
+}
+.detail .main-content .top-container .panel {
+  display: flex;
+  padding-left: 100px;
+  align-items: flex-end;
+}
+
+.detail .main-content .bottom-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 30px;
+  /* width:100% */
+  /* width: 35%; */
+}
+
+.detail img {
+  margin:auto;
+  width:150px
+}
+
+.detail .top-container .panel p {
+  display: block;
+  text-align: left;
+  font-size: 20px;
+  margin-top: 0px;
+  margin-bottom: 0;
+  font-family: 'Cinzel', serif;
+}
+
+.detail .top-container .panel .name {
+  font-size: 40px;
+}
+
+.detail .top-container .panel .info {
+  margin-left: 15%;
+  /* border-radius: 10%;
+  background: #9b5de5; */
+  padding:20px
+}
+
+.detail .top-container .panel .info .primary-button {
+  margin-top: 10px;
+  margin-right: 160px;
+}
+
+.detail .service-list {
+  background: #dfe7fd;
+  border-radius: 5%;
+  padding:10px
+}
+
+.detail h1{
+  text-align: left;
+  margin-left: 20px;
+}
+
+.detail .list {
+  display: flex;
+  justify-content: space-between;
+  /* padding: 10px; */
+  margin: 5px;
+  background-color: #cdb4db;
+  border-radius: 10px;
+  
+}
+
+.detail .list .left {
+  padding-left: 40px;
+}
+
+.detail .list .right {
+  padding-right: 30px;
+}
+
+.detail .list h3{
+  text-transform: capitalize;
+  font-weight: bold;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.detail .list p {
+  margin-bottom: 0;
+}
+
+.booking {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 400px;
+  height: 650px;
+  background: white;
+  border-radius: 10px;
+  border: solid 3px #dee2ff;
+  padding: 40px;
+  z-index:999
+}
+
+.booking .close-icon {
+  float: right;
+}
+
+.booking h2 {
+  margin-bottom: 30px;
+}
+
+.booking h3 {
+  text-align: left;
+}
+
+.booking form {
+  display: flex;
+  flex-direction: column;
+}
+
+.booking form input {
+  padding: 8px;
+  margin:0px;
+  font-size: 15px;
+}
+
+.booking form label {
+  text-align: left;
+}
+
+.booking form input[type="submit"] {
+  padding: 8px;
+  margin:15px;
+  font-size: 20px;
+}
 
 
   

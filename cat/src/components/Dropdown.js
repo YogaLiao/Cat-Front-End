@@ -31,6 +31,7 @@ function Dropdown({ setUserSignedIn, setAccessToken }) {
                     
                       console.log(localStorage)
                     navigate('/')
+                    window.location.reload(false)
                   }}
               >
                 Log Out

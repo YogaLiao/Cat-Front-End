@@ -46,11 +46,11 @@ function Dashboard({ accessToken,userSignedIn, setAccessToken, setUserSignedIn, 
         let info = data.data.filter(x => x.username == userSignedIn)
         console.log(info)
         setUserInfo(info[0])
-        setFormData(userInfo)
-        setUserId(userInfo.id)
+        setFormData(info[0])
+        setUserId(info[0].id)
       })
   }, [])
-console.log(userInfo)
+// console.log(userInfo)
   const [networkErrMsg, setNetworkErrMsg] = useState(null)
   const [clientErrMsg, setClientErrMsg] = useState(null)
 
@@ -151,7 +151,8 @@ console.log(userInfo)
             <div className="servicePanel">
             
               <ServicePanel
-                userSignedIn={userSignedIn}
+                  userSignedIn={userSignedIn}
+                  accessToken = {accessToken}
               />
             </div>
                 
@@ -290,7 +291,7 @@ console.log(userInfo)
                   <input type="submit" value = "Update Profile"></input>
                   </section>
               </form>
-                  {/* <input type="submit" value = "Delete Account" className='delete'></input> */}
+                  <input type="submit" value = "Delete Account" className='delete'></input>
             </div>
           </section>
         </div>

@@ -6,6 +6,7 @@ import Nav from "./components/Nav";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import {useState, useEffect} from "react"
 import Result from "./pages/Result";
+import ServiceDetail from "./pages/ServiceDetail";
 
 function App() {
   const [userSignedIn, setUserSignedIn] = useState(localStorage.getItem('user'))
@@ -62,6 +63,16 @@ function App() {
         setIsSignUp={setIsSignUp}
         />} />
         <Route path="/results" element={<Result
+        userSignIn={userSignedIn}
+        setUserSignedIn={setUserSignedIn}
+        accessToken={accessToken}
+        setAccessToken={setAccessToken}
+        showModal={showModal}
+        setShowModal={setShowModal}
+        isSignUp={isSignUp}
+        setIsSignUp={setIsSignUp}
+        />} />
+        <Route path="/detail" element={<ServiceDetail
         userSignIn={userSignedIn}
         setUserSignedIn={setUserSignedIn}
         accessToken={accessToken}

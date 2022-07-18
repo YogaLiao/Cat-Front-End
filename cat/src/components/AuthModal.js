@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function AuthModal({ setShowModal, isSignUp, setUserSignedIn, setAccessToken }) {
+function AuthModal({ setShowModal, isSignUp, setUserSignedIn, setAccessToken, setIsSignUp }) {
   const [formInfo, setFromInfo] = useState(null)
-
-
-  
   // const [email, setEmail] = useState(null)
   // const [password, setPassword] = useState(null)
   // const [confirmPassword, setConfirmPassword] = useState(null)
@@ -23,6 +20,11 @@ function AuthModal({ setShowModal, isSignUp, setUserSignedIn, setAccessToken }) 
   const handleClick = () => {
     setShowModal(false)
   }
+
+  const handleSignUp = () => {
+    setIsSignUp(false)
+  }
+
   const handleChange = (e) => {
     setFromInfo({ ...formInfo, [e.target.id]: e.target.value })
   }
@@ -159,7 +161,7 @@ function AuthModal({ setShowModal, isSignUp, setUserSignedIn, setAccessToken }) 
           localStorage.setItem('refresh_token', data.refresh)
           // redirect here
           console.log(localStorage)
-          navigate('/')
+          // navigate('/')
         }
       })
       
@@ -169,7 +171,6 @@ function AuthModal({ setShowModal, isSignUp, setUserSignedIn, setAccessToken }) 
       <div className = "auth-modal">
       <div className='close-icon' onClick={handleClick}>ⓧ</div>
       <h2>{isSignUp ? 'CREATE ACCOUNT' : "LOGIN"}</h2>
-      <p>By clicking Login, you agree to our terms. Learn how we protect your data in our Privacy Policy and Cookie Policy.</p>
       <form onSubmit = {handleSubmit}>
         {isSignUp ? 
           <input
@@ -208,6 +209,9 @@ function AuthModal({ setShowModal, isSignUp, setUserSignedIn, setAccessToken }) 
         : null }
         <input className = "secondary-button" type="submit" />
         <p>{error}</p>
+        {isSignUp
+          ? <p>Already have an account? You can <span onClick = {handleSignUp}>sign in</span> here.</p>
+      :null}
       </form>
       <hr />
       <h2>CATTY</h2>

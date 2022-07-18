@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { Calendar } from "react-multi-date-picker"
 import '@mobiscroll/react/dist/css/mobiscroll.min.css';
 import axios from 'axios';
+import Footer from '../components/Footer';
 
 function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
   let navigate = useNavigate()
@@ -263,7 +264,8 @@ console.log(formData.service)
                   
               <input type="submit"></input>
               </section>
-          </form>
+      </form>
+      <Footer />
     </div>
   )
 }

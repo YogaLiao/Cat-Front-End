@@ -5,8 +5,10 @@ import { AiOutlineHeart } from 'react-icons/ai'
 import { IoMdArrowDropdown } from 'react-icons/io'
 import SearchForm from './SearchForm'
 import Dropdown from './Dropdown'
+import { useNavigate } from "react-router-dom"
 
 function Nav({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
+  const navigate = useNavigate()
   const [userSearch, setUserSearch] = useState(false)  
   const [dropdown, setDropdown] = useState(false);
   
@@ -25,6 +27,12 @@ function Nav({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, show
     setShowModal(false)
   }
 
+  const handleSitter = () => {
+    userSignedIn
+      ? navigate('/add')
+      : setShowModal(true)
+  }
+
     return (
         <nav>
             <div className = 'left-container'>
@@ -34,7 +42,7 @@ function Nav({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, show
             </div>
             <div className='mid-container'>
                 <h3 onClick = {handleSearch}><BiSearch /> Search Sitters&nbsp;&nbsp;</h3>
-                <h3><AiOutlineHeart /> Become a Sitter&nbsp;&nbsp;</h3>
+                <h3 onClick = {handleSitter}><AiOutlineHeart /> Become a Sitter&nbsp;&nbsp;</h3>
                 <h3><BiMessageAltCheck /> About Us</h3>
             </div>
             <div className='nav-buttons'>
@@ -62,7 +70,8 @@ function Nav({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, show
             isSignUp={isSignUp}
             userSignedIn={userSignedIn}
           setUserSignedIn={setUserSignedIn}
-          setAccessToken = {setAccessToken}
+            setAccessToken={setAccessToken}
+            setIsSignUp={setIsSignUp}
           />}
           {userSearch && <SearchForm
             setUserSearch={setUserSearch}/>}

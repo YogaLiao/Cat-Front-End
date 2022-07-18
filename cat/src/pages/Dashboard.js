@@ -1,9 +1,9 @@
 import React, { useState,useEffect } from 'react'
 import ServicePanel from '../components/ServicePanel'
-import Calendar2 from '../components/Calendar2'
 import Nav from '../components/Nav'
 import axios from 'axios'
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import Footer from '../components/Footer';
 
 function Dashboard({ accessToken,userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
   userSignedIn = localStorage.getItem('user')
@@ -295,9 +295,9 @@ function Dashboard({ accessToken,userSignedIn, setAccessToken, setUserSignedIn, 
             </div>
           </section>
         </div>
-        {/* <Calendar2 /> */}
-      </div>
-}
+        
+        </div>
+} <Footer />
 </>)
 }
 

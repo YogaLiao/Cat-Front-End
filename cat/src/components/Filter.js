@@ -5,28 +5,47 @@ import { AiOutlineCalendar } from 'react-icons/ai'
 import DatePicker, { DateObject } from "react-multi-date-picker"
 import DatePanel from "react-multi-date-picker/plugins/date_panel"
 import InputRange from 'react-input-range';
+import { useNavigate } from "react-router-dom"
 
 function Filter() {
-
-    const [service, setService] = useState(localStorage.service)
-    const [zipcode, setZipcode] = useState(localStorage.zipcode)
+    let navigate = useNavigate()
+    const [service, setService] = useState(localStorage.getItem('service'))
+    const [zipcode, setZipcode] = useState(localStorage.getItem('zipcode'))
     const [openDate, setOpenDate] = useState(false);
+    const [date, setDate] = useState([
+      {
+        startDate: new Date(localStorage.getItem("start_date")),
+        endDate: new Date(localStorage.getItem('end_date')),
+        key: "selection",
+      },
+    ]);
     const [value, setValue] = useState(50)
     
 
-    const [dates, setDates] = useState([
-      new Date(localStorage.start_date), new Date(localStorage.end_date)
-    ]);
+    // const [dates, setDates] = useState([
+    //   new Date(localStorage.start_date), new Date(localStorage.end_date)
+    // ]);
 
     const handleCheck = (e) => {
         setService(e.target.value)
         console.log(service)   
     }
+  
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    localStorage.setItem('service', service)
+    localStorage.setItem('zipcode', zipcode)
+    localStorage.setItem('rate', value)
+      localStorage.setItem('start_date', date[0].startDate)
+      localStorage.setItem('end_date', date[0].endDate)
+    navigate('/results')
+    window.location.reload(false)
+  }
 
   return (
       <div className='filter'>
           <div className="service">
-              <form>
+              <form onSubmit={handleSubmit}>
               <label className = "search-title">Service Type</label>
               <div className='multiple-input-container'>
             <input
@@ -67,7 +86,7 @@ function Filter() {
           onChange={e => setZipcode(e.target.value)}
         />
                   <label className="search-title">Date Range</label>
-                  {/* <span onClick={() => setOpenDate(!openDate)}
+                  <span onClick={() => setOpenDate(!openDate)}
                   className="headerSearchText"><AiOutlineCalendar /> Add Dates: {`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
                     date[0].endDate,
                     "MM/dd/yyyy"
@@ -80,15 +99,15 @@ function Filter() {
                       ranges={date}
                       className="date"
                       minDate={new Date()}
-          />)} */}
-                  <DatePicker 
+          />)}
+                  {/* <DatePicker 
                       value={dates}
                       className='date'
                       onChange={setDates}
                       range
                       plugins={[
                         <DatePanel eachDaysInRange />
-                      ]} />
+                      ]} /> */}
                   <label className="search-title">Rate Range: (<span>0 ~ ${value}</span>/per visit)</label>
                   {/* <output id="rangevalue" >{value}</output> */}
                   <input type="range" min="0" max="100" onChange={e => setValue(e.target.value)} />

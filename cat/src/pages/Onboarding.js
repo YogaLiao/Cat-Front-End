@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Nav from '../components/Nav'
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import Footer from '../components/Footer';
 
 function Onboarding({ userSignedIn, accessToken, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
   let navigate = useNavigate()
@@ -255,6 +256,7 @@ function Onboarding({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
           </section>
           
         </form>
+        <Footer />
       </div>
     </>
   )

@@ -3,19 +3,22 @@ import Nav from '../components/Nav'
 import Filter from '../components/Filter'
 import axios from 'axios'
 import { DateRange } from "react-date-range";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
+import Footer from '../components/Footer';
 
 function Result({ accessToken, userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
     userSignedIn = localStorage.getItem('user')
     const navigate = useNavigate()
     console.log(localStorage)
-    const [service, setService] = useState(localStorage.getItem('service'))
+    const service = localStorage.getItem('service')
     const [serviceInfo, setServiceInfo] = useState([])
-    const [zipcode, setZipcode] = useState(localStorage.getItem('zipcode'))
+    const zipcode = localStorage.getItem('zipcode')
+    const rate = localStorage.getItem('rate') || 50
     const start_date = localStorage.getItem('start_date')
     const end_date = localStorage.getItem('end_date')
 
-    const [rate, setRate] = useState(0)
+    // const [rate, setRate] = useState(0)
     const endpoint = `search/services/?service=${service}`
 
     // const compareDates = (arr) => {
@@ -34,38 +37,71 @@ function Result({ accessToken, userSignedIn, setAccessToken, setUserSignedIn, se
         axios.get(process.env.REACT_APP_API_URL + endpoint)
             .then(data => {
                 let info = data.data.filter(x => {
-                    return (x.username != userSignedIn && x.zipcode.slice(0,3) == zipcode.slice(0,3))
+                    return (x.username != userSignedIn && x.zipcode.slice(0,3) == zipcode.slice(0,3) && x.rate <= rate)
                 })
-                setServiceInfo(info)
+                console.log(info)
+                let result = []
+            if (info.length > 0)
+                {for (let i = 0; i < info.length; i++) {
+                    let copy = info[i].disable.filter(x => {
+                        return (new Date(x).valueOf() > new Date(end_date).valueOf() || new Date(x).valueOf() < new Date(start_date).valueOf())
+                    })
+                    console.log(copy)
+                    if (copy.length === info[i].disable.length) {
+                        result.push(info[i])
+                    }
+                }}
+                
+                setServiceInfo(result)
             })
     }, [])
 
     console.log(serviceInfo)
-    console.log(localStorage.getItem('start_date'))
-    const start = localStorage.getItem('start_date')
-    const dates = DateRange[localStorage.getItem('start_date'), localStorage.getItem('end_date')]
-    console.log(dates)
+    console.log(rate)
 
-  return (
-      <div className='results'>
-          <Nav
-          setShowModal={setShowModal}
-          showModal={showModal}
-          setIsSignUp={setIsSignUp}
-          isSignUp={isSignUp}
-          userSignedIn={userSignedIn}
-          setUserSignedIn={setUserSignedIn}
-          setAccessToken={setAccessToken}
-          />
-          <div className='main-content'>
-            <div className='left-container'>
-                  <Filter />
-              </div>
-              <div className='right-container'>
-                  <h1>Search Results:</h1>
-              </div> 
-          </div>
-    </div>
+    return (
+        <>
+            {!serviceInfo
+                ? "Loading"
+                : <div className='results'>
+                    <Nav
+                        setShowModal={setShowModal}
+                        showModal={showModal}
+                        setIsSignUp={setIsSignUp}
+                        isSignUp={isSignUp}
+                        userSignedIn={userSignedIn}
+                        setUserSignedIn={setUserSignedIn}
+                        setAccessToken={setAccessToken}
+                    />
+                    <div className='main-content'>
+                        <div className='left-container'>
+                            <Filter />
+                        </div>
+                        <div className='right-container'>
+                            {serviceInfo.length === 0
+                                ? <h3>Sorry we currently do not have pet sitters that fits your needs. You can check later.</h3>
+                                : <div className='result-list'>
+                          
+                                    {serviceInfo.map(x => (
+                                        <Link to={`/results/${x.id}`}>
+                                            <div className='card'>
+                                                <img className="picture" src={x.url}></img>
+                                                <div className='card-detail'>
+                                                    <h1>{x.first_name} {x.last_name}</h1>
+                                                    <p>{x.headline}</p>
+                                                    <h3>{x.city}, {x.state} {x.zipcode}</h3>
+                                                    <h3>${x.rate} per visit</h3>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <Footer />
+                </div>}
+            </>
   )
 }
 

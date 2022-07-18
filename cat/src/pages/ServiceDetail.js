@@ -1,15 +1,18 @@
 import React, {useState, useEffect} from 'react'
 import Nav from '../components/Nav'
 import axios from 'axios'
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { Calendar, utils } from "react-modern-calendar-datepicker";
 import Booking from '../components/Booking';
+import Footer from '../components/Footer';
 
 function ServiceDetail({ accessToken, userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
-userSignedIn = localStorage.getItem('user')
+    userSignedIn = localStorage.getItem('user')
+    let { id } = useParams()
+    console.log(id)
   let navigate = useNavigate()
   console.log(userSignedIn)
-    const userEndpoint = 'services/4'
+    const userEndpoint = `services/${id}`
     const [serviceInfo, setserviceInfo] = useState()
     const [disabledDays, setDisabledDays] = useState([])
     const [openBook, setOpenBook] = useState(false)
@@ -23,7 +26,13 @@ userSignedIn = localStorage.getItem('user')
 
     const handleDisabledSelect = disabledDay => {
         console.log('Tried selecting a disabled day', disabledDay);
-      }
+    }
+    
+    const handleBook = () => {
+        userSignedIn
+            ? setOpenBook(true)
+            : setShowModal(true)
+    }
 
 
     useEffect(() => {
@@ -70,7 +79,7 @@ userSignedIn = localStorage.getItem('user')
                 <div className='info'>
                   <p className="name">{serviceInfo.first_name} {serviceInfo.last_name}</p>
                     <p>{serviceInfo.city}, {serviceInfo.state}</p>
-                    <button onClick={e => setOpenBook(true)} className='primary-button'>Book Now</button>
+                                      <button onClick={handleBook} className='primary-button'>Book Now</button>
                 </div>
               </div>
                 
@@ -110,21 +119,22 @@ userSignedIn = localStorage.getItem('user')
             </div>
             <div className="review">
                               <h1>About {serviceInfo.first_name} {serviceInfo.last_name}</h1>
-                              <h2>{serviceInfo.about}</h2>
-                              <h1>Contact {serviceInfo.first_name} {serviceInfo.last_name}</h1>
-                              <h2>Call: {serviceInfo.cell}</h2>
+                              <p>{serviceInfo.about}</p>
+                              
 
                 <h1>Reviews</h1>
                 <h1>Coming Soon!</h1>
             </div>
                       </section>
-                      </div>
+                  </div>
+                  <Footer />
                   {openBook && <Booking
                       setOpenBook = {setOpenBook}
                       accessToken={accessToken}
                       serviceInfo={serviceInfo}
                       disabledDays={disabledDays}
                   />}
+                  <Footer />
               </div>
           }
 

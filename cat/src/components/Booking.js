@@ -6,7 +6,8 @@ import {useNavigate} from "react-router-dom"
 
 function Booking({ setOpenBook, accessToken, serviceInfo, disabledDays }) {
     let navigate = useNavigate()
-    console.log(serviceInfo)
+  console.log(serviceInfo)
+  const endpoint = `services/${serviceInfo.id}`
     const defaultValue = utils().getToday()
     console.log(defaultValue)
 
@@ -25,20 +26,30 @@ function Booking({ setOpenBook, accessToken, serviceInfo, disabledDays }) {
     const handleDisabledSelect = disabledDay => {
         console.log('Tried selecting a disabled day', disabledDay);
     }
+  
+  useEffect(() => {
+    axios.get(process.env.REACT_APP_API_URL + endpoint)
+    .then(data=> setServiceDetail(data.data))
+  }, [])
+  
+  const handleClick = () => {
+    setOpenBook(false)
+    window.location.reload(false)
+  }
     
     const handleSubmit = (e) => {
         e.preventDefault()
         setNetworkErrMsg(null)
         console.log(serviceInfo)
         console.log(`${selectedDay.year}/${selectedDay.month}/${selectedDay.day}`)
-        let dataCopy = serviceInfo.disable
+        let dataCopy = serviceDetail.disable
         dataCopy.push(`${selectedDay.year}/${selectedDay.month}/${selectedDay.day}`)
         console.log(dataCopy)
         setServiceDetail({ ...serviceDetail, disable: dataCopy})
           console.log(serviceDetail)
           const apiUrl = process.env.REACT_APP_API_URL
         console.log(`fetching with token ${accessToken}`)
-        const endpoint = `services/${serviceInfo.id}`
+        
         fetch(apiUrl + endpoint,
             {
               method: 'PUT',
@@ -72,7 +83,7 @@ function Booking({ setOpenBook, accessToken, serviceInfo, disabledDays }) {
               }
             })
     
-        navigate('/detail')
+        navigate(`/results/${serviceDetail.id}`)
         window.location.reload(false)
 
 
@@ -80,14 +91,14 @@ function Booking({ setOpenBook, accessToken, serviceInfo, disabledDays }) {
     console.log(serviceDetail)
   return (
       <div className='booking'>
-          <div className='close-icon' onClick={e => setOpenBook(false)}>ⓧ</div>
+          <div className='close-icon' onClick={handleClick}>ⓧ</div>
           <h2>Booking Detail</h2>
-          <h3>Booking with: {serviceInfo.first_name} {serviceInfo.last_name}</h3>
+          <h3>Booking with: {serviceDetail.first_name} {serviceDetail.last_name}</h3>
           <form onSubmit={handleSubmit}>
               <h3>Service Type:
-              {(serviceInfo.service === "housesitting") && <span> House Sitting</span>}
-          {(serviceInfo.service === "boarding") && <span> Boarding</span>}
-          {(serviceInfo.service === "dropin") && <span> Drop-in Visits</span>}
+              {(serviceDetail.service === "housesitting") && <span> House Sitting</span>}
+          {(serviceDetail.service === "boarding") && <span> Boarding</span>}
+          {(serviceDetail.service === "dropin") && <span> Drop-in Visits</span>}
               </h3>
               <h3>Select Date: </h3>
               <Calendar
@@ -104,7 +115,7 @@ function Booking({ setOpenBook, accessToken, serviceInfo, disabledDays }) {
             onDisabledDayError={handleDisabledSelect} // handle error
             shouldHighlightWeekends
             />  
-              <h3>Price: ${serviceInfo.rate}</h3>
+              <h3>Price: ${serviceDetail.rate}</h3>
               <input className="secondary-button" type="submit" value = "Confirm Booking" />
           </form>
 

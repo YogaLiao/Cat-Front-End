@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import Nav from '../components/Nav'
 import AuthModal from '../components/AuthModal'
+import Footer from '../components/Footer'
 
 function Home({userSignedIn,setUserSignedIn,setAccessToken, showModal, setShowModal, isSignUp, setIsSignUp}) {
   console.log(userSignedIn)
@@ -8,7 +9,8 @@ function Home({userSignedIn,setUserSignedIn,setAccessToken, showModal, setShowMo
   console.log(localStorage.getItem('user'))
   console.log(userSignedIn)
 
-    return (
+  return (
+      <>
     <div className = "overlay">
       <Nav
           setShowModal={setShowModal}
@@ -23,8 +25,10 @@ function Home({userSignedIn,setUserSignedIn,setAccessToken, showModal, setShowMo
                 <h1 className='primary-title'>Book a</h1>
                 <h1 className = 'highlight-title'>local & trusted</h1>
                 <h1 className='primary-title'>cat sitter here.</h1>
-            </div>
-    </div>
+        </div>
+        <Footer />
+      </div>
+      </>
   )
 }
 

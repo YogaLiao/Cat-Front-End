@@ -163,10 +163,20 @@ nav .logo-container .logo {
   background: white;
   border-radius: 10px;
   padding: 40px;
+  z-index: 999;
 }
 
 .auth-modal .close-icon {
   float: right;
+}
+
+.auth-modal p{
+  color: #9b5de5;
+}
+
+.auth-modal span {
+  color: #6a4c93;
+  text-decoration: underline;
 }
 
 .auth-modal form {
@@ -195,6 +205,8 @@ nav .logo-container .logo {
   background: white;
   border-radius: 10px;
   padding: 40px;
+  z-index: 999;
+  /* background: #dee2ff; */
 }
 
 .search-form .close-icon {
@@ -844,6 +856,47 @@ nav .logo-container .logo {
   justify-content: center;
 }
 
+.results .right-container .result-list {
+  display: flex;
+  flex-direction: column;
+  padding:20px
+}
+
+.results a {
+  text-decoration: none;
+}
+
+.results .right-container .result-list .card {
+  display: flex;
+  border: solid 2px gainsboro;
+  padding:20px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.results .right-container .result-list .card .picture {
+  
+  margin-right: 30px;
+  margin-left: 30px;
+  border-radius: 10px;
+}
+
+.results .right-container .result-list .card img{
+  width: 150px;
+  height: 170px;
+  /* margin-bottom: 10%; */
+  object-fit: cover; 
+  object-position: 100% 0;
+  /* height: 200px; */
+}
+
+.results .right-container .result-list .card-detail {
+  text-align: left;
+  color: black;
+}
+
+
+
 /* -------Edit Service Page ------- */
 
 .edit-service {
@@ -858,6 +911,7 @@ nav .logo-container .logo {
   background: #dee2ff;
   border-radius: 10px;
   padding: 40px;
+  z-index: 999;
 }
 
 .edit-service .close-icon {
@@ -923,8 +977,10 @@ nav .logo-container .logo {
 }
 
 .detail img {
-  margin:auto;
-  width:150px
+  /* margin:auto; */
+  width:150px;
+  object-fit: cover; 
+  object-position: 100% 0;
 }
 
 .detail .top-container .panel p {
@@ -961,6 +1017,15 @@ nav .logo-container .logo {
 .detail h1{
   text-align: left;
   margin-left: 20px;
+}
+
+.detail .review {
+  margin-left: 90px;
+}
+
+.detail .review p {
+  font-size: 20px;
+  color: #6a4c93;
 }
 
 .detail .list {
@@ -1000,12 +1065,13 @@ nav .logo-container .logo {
   margin-left: auto;
   margin-right: auto;
   max-width: 400px;
-  height: 650px;
+  height: 680px;
   background: white;
   border-radius: 10px;
   border: solid 3px #dee2ff;
   padding: 40px;
-  z-index:999
+  z-index:999;
+  background: #dee2ff;
 }
 
 .booking .close-icon {
@@ -1041,5 +1107,18 @@ nav .logo-container .logo {
   font-size: 20px;
 }
 
-
+/* -------Footer ------- */
+.footer {
+  background: #9b5de5;
+  color: white;
+  padding:10px;
+  display: flex;
+  justify-content: space-around;
+  /* position: absolute;
+  bottom: 0; */
+  position:absolute;
+  bottom: 0;
+  width: 100vw;
+  z-index: 999;
+}
   

@@ -72,7 +72,7 @@ function App() {
         isSignUp={isSignUp}
         setIsSignUp={setIsSignUp}
         />} />
-        <Route path="/detail" element={<ServiceDetail
+        <Route path="/results/:id" element={<ServiceDetail
         userSignIn={userSignedIn}
         setUserSignedIn={setUserSignedIn}
         accessToken={accessToken}

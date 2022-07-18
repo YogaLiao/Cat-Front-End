@@ -5,8 +5,6 @@ import 'react-date-range/dist/theme/default.css';
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import { AiOutlineCalendar } from 'react-icons/ai'
-import DatePicker, { DateObject, getAllDatesInRange } from "react-multi-date-picker"
-import DatePanel from "react-multi-date-picker/plugins/date_panel"
 
 
 function SearchForm({ setUserSearch }) {

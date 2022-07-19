@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500&display=swap');
 
 
 html body{
@@ -162,6 +163,7 @@ nav .logo-container .logo {
   height: 500px;
   background: white;
   border-radius: 10px;
+  border: solid 1px black;
   padding: 40px;
   z-index: 999;
 }
@@ -206,6 +208,7 @@ nav .logo-container .logo {
   border-radius: 10px;
   padding: 40px;
   z-index: 999;
+  border: solid 1px black;
   /* background: #dee2ff; */
 }
 
@@ -473,6 +476,7 @@ nav .logo-container .logo {
 .service h1{
   text-align: left;
   margin-left: 20px;
+  font-family: 'Cormorant SC', serif;
 }
 
 .service .list {
@@ -625,6 +629,7 @@ nav .logo-container .logo {
 
   .dashboard .main-content .bottom-container .profile h1 {
     margin-left: 2%;
+    font-family: 'Cormorant SC', serif;
     /* text-align: start; */
   }
 
@@ -751,6 +756,8 @@ nav .logo-container .logo {
 .results .main-content .left-container {
   border: solid 2px gainsboro;
   border-radius: 10px;
+  height: 600px;
+  margin-right: 80px;
 }
 
 .filter .service {
@@ -859,7 +866,8 @@ nav .logo-container .logo {
 .results .right-container .result-list {
   display: flex;
   flex-direction: column;
-  padding:20px
+  padding:20px;
+  padding-top: 0;
 }
 
 .results a {
@@ -895,6 +903,10 @@ nav .logo-container .logo {
   color: black;
 }
 
+.results .right-container .result-list .card-detail h1{
+  font-family: 'Cormorant SC', serif;
+}
+
 
 
 /* -------Edit Service Page ------- */
@@ -908,10 +920,11 @@ nav .logo-container .logo {
   margin-right: auto;
   max-width: 360px;
   height: 450px;
-  background: #dee2ff;
+  background: white;
   border-radius: 10px;
   padding: 40px;
   z-index: 999;
+  border: solid 1px black;
 }
 
 .edit-service .close-icon {
@@ -1017,6 +1030,7 @@ nav .logo-container .logo {
 .detail h1{
   text-align: left;
   margin-left: 20px;
+  font-family: 'Cormorant SC', serif;
 }
 
 .detail .review {
@@ -1025,7 +1039,7 @@ nav .logo-container .logo {
 
 .detail .review p {
   font-size: 20px;
-  color: #6a4c93;
+
 }
 
 .detail .list {
@@ -1071,7 +1085,7 @@ nav .logo-container .logo {
   border: solid 3px #dee2ff;
   padding: 40px;
   z-index:999;
-  background: #dee2ff;
+  border: solid 1px black;
 }
 
 .booking .close-icon {

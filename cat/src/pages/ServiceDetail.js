@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { Calendar, utils } from "react-modern-calendar-datepicker";
 import Booking from '../components/Booking';
 import Footer from '../components/Footer';
+import ReactStars from "react-rating-stars-component";
 
 function ServiceDetail({ accessToken, userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
     userSignedIn = localStorage.getItem('user')

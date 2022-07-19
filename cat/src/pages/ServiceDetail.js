@@ -6,6 +6,7 @@ import { Calendar, utils } from "react-modern-calendar-datepicker";
 import Booking from '../components/Booking';
 import Footer from '../components/Footer';
 import ReactStars from "react-rating-stars-component";
+import Review from '../components/Review';
 
 function ServiceDetail({ accessToken, userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
     userSignedIn = localStorage.getItem('user')
@@ -124,7 +125,10 @@ function ServiceDetail({ accessToken, userSignedIn, setAccessToken, setUserSigne
                               
 
                 <h1>Reviews</h1>
-                <h1>Coming Soon!</h1>
+                    <Review 
+                        userSignedIn={userSignedIn}
+                        accessToken={accessToken}
+                        id = {id}      />
             </div>
                       </section>
                   </div>
@@ -135,7 +139,7 @@ function ServiceDetail({ accessToken, userSignedIn, setAccessToken, setUserSigne
                       serviceInfo={serviceInfo}
                       disabledDays={disabledDays}
                   />}
-                  <Footer />
+                  
               </div>
           }
 

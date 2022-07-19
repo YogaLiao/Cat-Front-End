@@ -1,9 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import ReactStars from "react-rating-stars-component";
+import { useNavigate } from "react-router-dom"
 
 function Review({ userSignedIn, id, accessToken }) {
     userSignedIn = localStorage.getItem('user')
+    const navigate = useNavigate()
     const [postReview, setPostReview] = useState(false)
     const userEndpoint = `services/${id}`
     const endpoint = 'reviews/'
@@ -69,6 +71,7 @@ function Review({ userSignedIn, id, accessToken }) {
               
                   console.log(data)
                   setPostReview(true)
+                  navigate(`/results/${id}`)
                   window.location.reload(false)
     
                 // call to refresh the list
@@ -79,13 +82,33 @@ function Review({ userSignedIn, id, accessToken }) {
     }
 
     console.log(formData)
+    console.log(postReview)
+    console.log(reviewInfo)
     return (
         <>
             {reviewInfo.length === 0
                 ? <p>No Review Yet. Add the first review below!</p>
                 :
                 <div className='reviews'>
-                    
+                    {reviewInfo.map(review => (
+                        <div className='review-card'>
+                        <div className='review-title'>
+                            <h2>{review.written_by}</h2>
+                                <span>{review.date}</span>
+                        </div>
+                        <ReactStars
+                        count={5}
+                        value={Number(review.rating)}
+                        size={24}
+                        isHalf={true}
+                        emptyIcon={<i className="far fa-star"></i>}
+                        halfIcon={<i className="fa fa-star-half-alt"></i>}
+                        fullIcon={<i className="fa fa-star"></i>}
+                        activeColor="#9b5de5"
+                        />
+                        <p>{review.content}</p>
+                        </div>
+                    ))}
                 </div>}
             {!postReview && <div className='review-box'>
                 <form onSubmit={handleSubmit}>

@@ -17,7 +17,8 @@ function ServiceDetail({ accessToken, userSignedIn, setAccessToken, setUserSigne
     const userEndpoint = `services/${id}`
     const [serviceInfo, setserviceInfo] = useState()
     const [disabledDays, setDisabledDays] = useState([])
-    const [openBook, setOpenBook] = useState(false)
+  const [openBook, setOpenBook] = useState(false)
+  const [avgRating, setAvgRating] = useState(0)
     const defaultValue = utils().getToday()
   
     console.log(defaultValue)
@@ -52,7 +53,10 @@ function ServiceDetail({ accessToken, userSignedIn, setAccessToken, setUserSigne
         day: d.getDate()
       })
     })
-    setDisabledDays(copy)
+            setDisabledDays(copy)
+            const review = data.data.reviews
+            let avg = review.reduce((r, c) => r + c.rating, 0) / review.length
+            setAvgRating(avg)
           })
     }, [])
     
@@ -81,7 +85,17 @@ function ServiceDetail({ accessToken, userSignedIn, setAccessToken, setUserSigne
                 <div className='info'>
                   <p className="name">{serviceInfo.first_name} {serviceInfo.last_name}</p>
                     <p>{serviceInfo.city}, {serviceInfo.state}</p>
-                                      <button onClick={handleBook} className='primary-button'>Book Now</button>
+                    <ReactStars
+                        count={5}
+                        value={Number(avgRating)}
+                        size={24}
+                        isHalf={true}
+                        emptyIcon={<i className="far fa-star"></i>}
+                        halfIcon={<i className="fa fa-star-half-alt"></i>}
+                        fullIcon={<i className="fa fa-star"></i>}
+                        activeColor="#9b5de5"
+                        />
+                    <button onClick={handleBook} className='primary-button'>Book Now</button>
                 </div>
               </div>
                 

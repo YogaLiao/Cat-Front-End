@@ -18,7 +18,6 @@ function Review({ userSignedIn, id, accessToken }) {
         rating: 5
     })
     const [networkErrMsg, setNetworkErrMsg] = useState(null)
-    const [clientErrMsg, setClientErrMsg] = useState(null)
 
     const statusCodeToErr = (responseObj) => {
       setNetworkErrMsg(`Network Error of code: ${responseObj.status}`)
@@ -29,7 +28,8 @@ function Review({ userSignedIn, id, accessToken }) {
         axios.get(process.env.REACT_APP_API_URL + userEndpoint)
             .then(data => {
                 setReviewInfo(data.data.reviews)
-        })
+            })
+        // eslint-disable-next-line
     }, [])
     
     const handleChange = (e) => {

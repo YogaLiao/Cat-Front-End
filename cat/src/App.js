@@ -2,11 +2,11 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Onboarding from "./pages/Onboarding";
 import AddService from "./pages/AddService";
-import Nav from "./components/Nav";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import {useState, useEffect} from "react"
 import Result from "./pages/Result";
 import ServiceDetail from "./pages/ServiceDetail";
+import Footer from "./components/Footer"
 
 function App() {
   const [userSignedIn, setUserSignedIn] = useState(localStorage.getItem('user'))
@@ -15,7 +15,7 @@ function App() {
   const [isSignUp, setIsSignUp] = useState(true)
   console.log(localStorage.getItem('user'))
   console.log(userSignedIn)
-  useEffect(() => setUserSignedIn(localStorage.getItem('user')))
+  useEffect(() => setUserSignedIn(localStorage.getItem('user')),[])
 
   return (
     <>
@@ -84,6 +84,7 @@ function App() {
         />} />
     </Routes>
       </BrowserRouter>
+      <Footer />
       </>
   );
 }

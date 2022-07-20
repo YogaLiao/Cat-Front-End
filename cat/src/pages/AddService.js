@@ -2,14 +2,12 @@ import React, {useState} from 'react'
 import Nav from '../components/Nav'
 import { useNavigate } from "react-router-dom"
 import { Calendar } from "react-multi-date-picker"
-import '@mobiscroll/react/dist/css/mobiscroll.min.css';
 import axios from 'axios';
 import Footer from '../components/Footer';
 
 function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
   let navigate = useNavigate()
   userSignedIn = localStorage.getItem('user')
-  const [checkData, setCheckData] = useState(true)
   const endpoint = "services/"
 
   const [networkErrMsg, setNetworkErrMsg] = useState(null)
@@ -66,6 +64,7 @@ function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
         // date = new DateObject()
         date = date.format();
         dateCopy.push(date)
+        return dateCopy
       })
       setFormData({ ...formData, disable: dateCopy })
       console.log(formData)

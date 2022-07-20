@@ -82,7 +82,7 @@ nav {
   margin: 15px;
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: flex-start;
   flex-grow: 1;
 }
 
@@ -397,7 +397,7 @@ nav .logo-container .logo {
 
 .add-service form {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   margin-left: 10%;
 }
 
@@ -600,7 +600,7 @@ nav .logo-container .logo {
   .dashboard .main-content {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     margin-left: 10%;
     padding: 20px;
     padding-top: 0;
@@ -747,7 +747,7 @@ nav .logo-container .logo {
 .results .main-content {
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: flex-start;
   margin-left: 10%;
   padding: 20px;
   padding-top: 0;
@@ -965,7 +965,7 @@ nav .logo-container .logo {
 .detail .main-content {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   margin-left: 10%;
   padding: 20px;
   padding-top: 0;
@@ -1195,7 +1195,7 @@ nav .logo-container .logo {
   justify-content: space-around;
   /* position: absolute;
   bottom: 0; */
-  position:absolute;
+  position:fixed;
   bottom: 0;
   width: 100vw;
   z-index: 999;

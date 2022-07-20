@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Nav from '../components/Nav'
 import { useNavigate } from "react-router-dom"
 import { Calendar } from "react-multi-date-picker"
@@ -9,7 +9,9 @@ function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
   let navigate = useNavigate()
   userSignedIn = localStorage.getItem('user')
   const endpoint = "services/"
+  const userEndpoint = "users/"
 
+  const [userId, setUserId] = useState()
   const [networkErrMsg, setNetworkErrMsg] = useState(null)
   const [clientErrMsg, setClientErrMsg] = useState(null)
 
@@ -39,10 +41,21 @@ function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
       })
   }
   
-    const [dates, setDates] = useState(new Date())
-
+  const [dates, setDates] = useState(new Date())
+  useEffect(() => {
+    axios.get(process.env.REACT_APP_API_URL + userEndpoint)
+      .then(data => 
+      {
+        let info = data.data.filter(x => x.username === userSignedIn)
+        console.log(info)
+        setUserId(info[0].id)
+        setFormData({ ...formData, user: info[0].id })
+      })
+    // eslint-disable-next-line
+  },[])
+console.log(userId)
     const [formData, setFormData] = useState({
-        user: userSignedIn,
+        user: "",
         displayName: userSignedIn,
         headline: "",
         service: "",
@@ -95,13 +108,14 @@ function AddService({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
           } else {
           
             console.log(data)
+            navigate('/dashboard')
 
             // call to refresh the list
             // set RefreshCounter(refreshCounter + 1)
           }
         })
 
-      navigate('/dashboard')
+      
     
   }
     

@@ -294,7 +294,7 @@ function Dashboard({ accessToken,userSignedIn, setAccessToken, setUserSignedIn, 
                   <input type="submit" value = "Update Profile"></input>
                   </section>
               </form>
-                  <input type="submit" value = "Delete Account" className='delete'></input>
+                  {/* <input type="submit" value = "Delete Account" className='delete'></input> */}
             </div>
           </section>
         </div>

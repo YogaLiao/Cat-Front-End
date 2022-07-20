@@ -69,7 +69,7 @@ function SearchForm({ setUserSearch }) {
                       onChange={handleCheck}
                 checked={service === "housesitting"}
               />
-              <label htmlFor='housesitting'>House Setting</label>
+              <label htmlFor='housesitting'>House Sitting</label>
               <input
               id="dropin"
               type="radio"

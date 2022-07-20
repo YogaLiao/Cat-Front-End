@@ -85,14 +85,14 @@ function EditService({ id, setEdit, accessToken, userSignedIn }) {
                   setEdit(false)
                 //   setServiceDetail()
                   
-    
+                navigate('/dashboard')
+                window.location.reload(false)
                 // call to refresh the list
                 // set RefreshCounter(refreshCounter + 1)
               }
             })
     
-        navigate('/dashboard')
-        window.location.reload(false)
+        
 
         
     }

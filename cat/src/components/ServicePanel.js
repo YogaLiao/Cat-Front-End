@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import "@progress/kendo-theme-default/dist/all.css"; 
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import { Calendar, utils } from "react-modern-calendar-datepicker";

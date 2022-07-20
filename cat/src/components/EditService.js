@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import DatePicker, { DateObject } from "react-multi-date-picker"
+import DatePicker from "react-multi-date-picker"
 import DatePanel from "react-multi-date-picker/plugins/date_panel"
 import {useNavigate} from "react-router-dom"
 
@@ -11,7 +11,6 @@ function EditService({ id, setEdit, accessToken, userSignedIn }) {
     const endpoint = `services/${id}`
     console.log(endpoint)
     const [networkErrMsg, setNetworkErrMsg] = useState(null)
-    const [clientErrMsg, setClientErrMsg] = useState(null)
 
   const statusCodeToErr = (responseObj) => {
       setNetworkErrMsg(`Network Error of code: ${responseObj.status}`)

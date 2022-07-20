@@ -12,7 +12,6 @@ function ServiceDetail({ accessToken, userSignedIn, setAccessToken, setUserSigne
     userSignedIn = localStorage.getItem('user')
     let { id } = useParams()
     console.log(id)
-  let navigate = useNavigate()
   console.log(userSignedIn)
     const userEndpoint = `services/${id}`
     const [serviceInfo, setserviceInfo] = useState()

@@ -2,9 +2,6 @@ import React, { useState } from 'react'
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import { AiOutlineCalendar } from 'react-icons/ai'
-import DatePicker, { DateObject } from "react-multi-date-picker"
-import DatePanel from "react-multi-date-picker/plugins/date_panel"
-import InputRange from 'react-input-range';
 import { useNavigate } from "react-router-dom"
 
 function Filter() {

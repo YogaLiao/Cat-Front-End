@@ -15,7 +15,6 @@ function Booking({ setOpenBook, accessToken, serviceInfo, disabledDays }) {
     const [selectedDay, setSelectedDay] = useState(defaultValue);
     const [selected, setSelected] = useState(false)
     const [networkErrMsg, setNetworkErrMsg] = useState(null)
-    const [clientErrMsg, setClientErrMsg] = useState(null)
 
   const statusCodeToErr = (responseObj) => {
       setNetworkErrMsg(`Network Error of code: ${responseObj.status}`)

@@ -14,7 +14,7 @@ function AuthModal({ setShowModal, isSignUp, setUserSignedIn, setAccessToken, se
   const loginEndpoint = 'api/token/'
 
   const statusCodeToErr = (responseObj) => {
-    if (responseObj.status == 401)
+    if (responseObj.status === 401)
       setError('Please check your username and/or password')
   }
   const handleClick = () => {

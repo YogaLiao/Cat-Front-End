@@ -2,14 +2,11 @@ import React, {useState, useEffect} from 'react'
 import Nav from '../components/Nav'
 import Filter from '../components/Filter'
 import axios from 'axios'
-import { DateRange } from "react-date-range";
-import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 import Footer from '../components/Footer';
 
 function Result({ accessToken, userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
     userSignedIn = localStorage.getItem('user')
-    const navigate = useNavigate()
     console.log(localStorage)
     const service = localStorage.getItem('service')
     const [serviceInfo, setServiceInfo] = useState([])
@@ -37,7 +34,7 @@ function Result({ accessToken, userSignedIn, setAccessToken, setUserSignedIn, se
         axios.get(process.env.REACT_APP_API_URL + endpoint)
             .then(data => {
                 let info = data.data.filter(x => {
-                    return (x.username != userSignedIn && x.zipcode.slice(0,3) == zipcode.slice(0,3) && x.rate <= rate)
+                    return (x.username !== userSignedIn && x.zipcode.slice(0,3) === zipcode.slice(0,3) && x.rate <= rate)
                 })
                 console.log(info)
                 let result = []
@@ -54,6 +51,7 @@ function Result({ accessToken, userSignedIn, setAccessToken, setUserSignedIn, se
                 
                 setServiceInfo(result)
             })
+        // eslint-disable-next-line
     }, [])
 
     console.log(serviceInfo)
@@ -85,7 +83,7 @@ function Result({ accessToken, userSignedIn, setAccessToken, setUserSignedIn, se
                                     {serviceInfo.map(x => (
                                         <Link to={`/results/${x.id}`}>
                                             <div className='card'>
-                                                <img className="picture" src={x.url}></img>
+                                                <img className="picture" src={x.url} alt='N/A'></img>
                                                 <div className='card-detail'>
                                                     <h1>{x.first_name} {x.last_name}</h1>
                                                     <p>{x.headline}</p>

@@ -25,6 +25,7 @@ function Onboarding({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
   })
 
   const [networkErrMsg, setNetworkErrMsg] = useState(null)
+  // eslint-disable-next-line
   const [clientErrMsg, setClientErrMsg] = useState(null)
 
   const statusCodeToErr = (responseObj) => {

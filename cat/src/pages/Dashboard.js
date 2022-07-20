@@ -43,15 +43,17 @@ function Dashboard({ accessToken,userSignedIn, setAccessToken, setUserSignedIn, 
   useEffect(() => {
     axios.get(process.env.REACT_APP_API_URL + userEndpoint)
       .then(data => {
-        let info = data.data.filter(x => x.username == userSignedIn)
+        let info = data.data.filter(x => x.username === userSignedIn)
         console.log(info)
         setUserInfo(info[0])
         setFormData(info[0])
         setUserId(info[0].id)
       })
+    // eslint-disable-next-line
   }, [])
 // console.log(userInfo)
   const [networkErrMsg, setNetworkErrMsg] = useState(null)
+  // eslint-disable-next-line
   const [clientErrMsg, setClientErrMsg] = useState(null)
 
   const statusCodeToErr = (responseObj) => {
@@ -135,9 +137,10 @@ function Dashboard({ accessToken,userSignedIn, setAccessToken, setUserSignedIn, 
           <section className="top-container">
             <div>
               
-              <div className="panel">
-                <div className='img-container'>
-                  <img src={userInfo.url}></img>
+                <div className="panel">
+                  <div className='img-container'>
+                  
+                  <img src={userInfo.url} alt="N/A"></img>
                 </div>
                 <div className='info'>
                   <p className="name">{userInfo.first_name} {userInfo.last_name}</p>

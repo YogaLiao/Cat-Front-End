@@ -1,6 +1,4 @@
-import React, { useState, useEffect} from 'react'
 import Nav from '../components/Nav'
-import AuthModal from '../components/AuthModal'
 import Footer from '../components/Footer'
 
 function Home({userSignedIn,setUserSignedIn,setAccessToken, showModal, setShowModal, isSignUp, setIsSignUp}) {

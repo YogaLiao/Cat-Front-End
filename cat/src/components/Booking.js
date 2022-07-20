@@ -12,7 +12,8 @@ function Booking({ setOpenBook, accessToken, serviceInfo, disabledDays }) {
     console.log(defaultValue)
 
     const [serviceDetail, setServiceDetail] = useState(serviceInfo)
-    const [selectedDay, setSelectedDay] = useState(defaultValue);
+  const [selectedDay, setSelectedDay] = useState(defaultValue);
+  // eslint-disable-next-line
     const [selected, setSelected] = useState(false)
     const [networkErrMsg, setNetworkErrMsg] = useState(null)
 
@@ -28,7 +29,8 @@ function Booking({ setOpenBook, accessToken, serviceInfo, disabledDays }) {
   
   useEffect(() => {
     axios.get(process.env.REACT_APP_API_URL + endpoint)
-    .then(data=> setServiceDetail(data.data))
+      .then(data => setServiceDetail(data.data))
+    // eslint-disable-next-line
   }, [])
   
   const handleClick = () => {

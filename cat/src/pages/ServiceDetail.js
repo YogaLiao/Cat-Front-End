@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Nav from '../components/Nav'
 import axios from 'axios'
-import { useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { Calendar, utils } from "react-modern-calendar-datepicker";
 import Booking from '../components/Booking';
 import Footer from '../components/Footer';
@@ -23,7 +23,8 @@ function ServiceDetail({ accessToken, userSignedIn, setAccessToken, setUserSigne
     console.log(defaultValue)
 
 
-    const [selectedDay, setSelectedDay] = useState(defaultValue);
+  const [selectedDay, setSelectedDay] = useState(defaultValue);
+  // eslint-disable-next-line
     const [selected, setSelected] = useState(false)
 
     const handleDisabledSelect = disabledDay => {
@@ -43,7 +44,8 @@ function ServiceDetail({ accessToken, userSignedIn, setAccessToken, setUserSigne
             setserviceInfo(data.data)
               console.log(data.data)
               const disable = data.data.disable
-              let copy = []
+            let copy = []
+            // eslint-disable-next-line
         disable.map(day => {
       const d = new Date(day)
       copy.push({
@@ -57,6 +59,7 @@ function ServiceDetail({ accessToken, userSignedIn, setAccessToken, setUserSigne
             let avg = review.reduce((r, c) => r + c.rating, 0) / review.length
             setAvgRating(avg)
           })
+      // eslint-disable-next-line
     }, [])
     
   return (
@@ -79,7 +82,7 @@ function ServiceDetail({ accessToken, userSignedIn, setAccessToken, setUserSigne
               
               <div className="panel">
                 <div className='img-container'>
-                  <img src={serviceInfo.url}></img>
+                  <img src={serviceInfo.url} alt='N/A'></img>
                 </div>
                 <div className='info'>
                   <p className="name">{serviceInfo.first_name} {serviceInfo.last_name}</p>

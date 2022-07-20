@@ -21,10 +21,11 @@ function ServicePanel({userSignedIn, accessToken}) {
   useEffect(() => {
     const all = ['housesitting', 'boarding', 'dropin']
     const copy = []
+    // eslint-disable-next-line
     all.map(x => {
       axios.get(process.env.REACT_APP_API_URL + typeEndpoint + x)
         .then(data => {
-          let info = data.data.filter(x=>x.username == userSignedIn)
+          let info = data.data.filter(x=>x.username === userSignedIn)
           if (info.length > 0) {
           copy.push(x)
         }
@@ -34,7 +35,7 @@ function ServicePanel({userSignedIn, accessToken}) {
     
     axios.get(process.env.REACT_APP_API_URL + userEndpoint)
       .then(data => {
-          let info = data.data.filter(x=>x.username == userSignedIn)
+          let info = data.data.filter(x=>x.username === userSignedIn)
           // console.log(data.data)
           setServiceInfo(info)
           console.log(serviceInfo)
@@ -44,6 +45,7 @@ function ServicePanel({userSignedIn, accessToken}) {
           }
       )
   }
+    // eslint-disable-next-line
     , [])
   console.log(serviceInfo)
   console.log(types)
@@ -72,9 +74,10 @@ function ServicePanel({userSignedIn, accessToken}) {
 
     const handleChange = (e) => {
     setType(e.target.value)
-    const filteredData = serviceInfo.filter(x => x.service == type)
+    const filteredData = serviceInfo.filter(x => x.service === type)
     const disable = filteredData[0].disable
-    let copy = []
+      let copy = []
+      // eslint-disable-next-line
     disable.map(day => {
       const d = new Date(day)
       copy.push({

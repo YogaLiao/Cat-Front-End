@@ -29,7 +29,7 @@ function EditService({ id, setEdit, accessToken, userSignedIn }) {
         })
     }
     useEffect(() => {getData()
-        
+    // eslint-disable-next-line
     }, [])
     
     const handleChange = (e) => {
@@ -46,7 +46,8 @@ function EditService({ id, setEdit, accessToken, userSignedIn }) {
           console.log(serviceDetail)
           // console.log(dates[0].format())
           // console.log(dates[1].format())
-          let dateCopy = []
+      let dateCopy = []
+      // eslint-disable-next-line
           dates.map(date => {
             // date = new DateObject()
             date = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDay()}`;

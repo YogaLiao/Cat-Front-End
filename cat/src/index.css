@@ -320,6 +320,14 @@ nav .logo-container .logo {
   border-radius: 10px;
 }
 
+.onboarding form textarea {
+  padding: 15px 30px;
+  margin: 10px 0;
+  font-size: 15px;
+  border: solid 2px rgb(219,219,219);
+  border-radius: 10px;
+}
+
 .onboarding form input::-webkit-outer-spin-button,
 .onboarding form input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -358,9 +366,11 @@ nav .logo-container .logo {
 .onboarding form input[type = "number"] {
   width: 10%;
 }
-.onboarding form input[type = "textbox"] {
+/* .onboarding form input[type = "textarea"] {
   height: 15%;
-}
+  
+
+} */
 .onboarding form input[id = 'city']{
   width:20%;
 }

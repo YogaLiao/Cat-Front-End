@@ -222,14 +222,22 @@ function Onboarding({ userSignedIn, accessToken, setAccessToken, setUserSignedIn
           <section>
 
           <label htmlFor='about'>About Me</label>
-            <input
+            {/* <input
               id='about'
-              type="textbox"
+              type="textarea"
               name='about'
               required={true}
               value={formData.about}
               onChange={handleChange}
-            />
+            /> */}
+            <textarea
+              name="about"
+              id='about'
+              required={true}
+              value={formData.about}
+              onChange={handleChange}
+              style={{ height: '150px'}}
+            ></textarea>
             <label htmlFor='url'>Profile Pirture</label>
             <input
               type="url"

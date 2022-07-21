@@ -5,7 +5,7 @@ import { AiOutlineHeart } from 'react-icons/ai'
 import { IoMdArrowDropdown } from 'react-icons/io'
 import SearchForm from './SearchForm'
 import Dropdown from './Dropdown'
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 function Nav({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
   const navigate = useNavigate()
@@ -43,7 +43,7 @@ function Nav({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, show
             <div className='mid-container'>
                 <h3 onClick = {handleSearch}><BiSearch /> Search Sitters&nbsp;&nbsp;</h3>
                 <h3 onClick = {handleSitter}><AiOutlineHeart /> Become a Sitter&nbsp;&nbsp;</h3>
-                <h3><BiMessageAltCheck /> About Us</h3>
+                <Link to="/about"><h3><BiMessageAltCheck /> About Us</h3></Link>
             </div>
             <div className='nav-buttons'>
             {userSignedIn ? null :  <button

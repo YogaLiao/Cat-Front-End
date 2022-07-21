@@ -7,6 +7,7 @@ import {useState, useEffect} from "react"
 import Result from "./pages/Result";
 import ServiceDetail from "./pages/ServiceDetail";
 import Footer from "./components/Footer"
+import About from "./pages/About";
 
 function App() {
   const [userSignedIn, setUserSignedIn] = useState(localStorage.getItem('user'))
@@ -81,7 +82,17 @@ function App() {
         setShowModal={setShowModal}
         isSignUp={isSignUp}
         setIsSignUp={setIsSignUp}
-        />} />
+          />}/>
+          <Route path="/about" element={<About
+            userSignIn={userSignedIn}
+            setUserSignedIn={setUserSignedIn}
+            accessToken={accessToken}
+            setAccessToken={setAccessToken}
+            showModal={showModal}
+            setShowModal={setShowModal}
+            isSignUp={isSignUp}
+            setIsSignUp={setIsSignUp}
+          />}/> 
     </Routes>
       </BrowserRouter>
       <Footer />

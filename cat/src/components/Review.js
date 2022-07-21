@@ -122,7 +122,7 @@ function Review({ userSignedIn, id, accessToken }) {
                 fullIcon={<i className="fa fa-star"></i>}
                 activeColor="#9b5de5"
                 />,
-                    <input type="text"
+                    <textarea 
                         placeholder='Write your review here'
                         required={true}
                         name='content'

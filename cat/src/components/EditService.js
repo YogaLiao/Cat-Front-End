@@ -49,7 +49,7 @@ function EditService({ id, setEdit, accessToken, userSignedIn }) {
       let dateCopy = []
       // eslint-disable-next-line
           dates.map(date => {
-            // date = new DateObject()
+            date = new Date(date)
             date = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDay()}`;
             dateCopy.push(date)
           })

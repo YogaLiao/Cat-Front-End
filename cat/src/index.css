@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Edu+SA+Beginner&display=swap');
 
 
 html body{
@@ -11,7 +12,9 @@ html body{
 
 a{
   text-decoration: none;
+  color: black;
 }
+
 
 * {
   font-family: 'Josefin Sans', sans-serif;
@@ -21,7 +24,7 @@ a{
   font-size: 90px;
   color: black;
   text-align: left;
-  margin-left: 60px;
+  margin-left: 70px;
   line-height: 0%;
 }
 
@@ -29,7 +32,7 @@ a{
   font-size: 90px;
   color: #9b5de5;
   text-align: left;
-  margin-left: 60px;
+  margin-left: 70px;
 }
 
 .primary-button {
@@ -116,6 +119,11 @@ nav .logo-container .logo {
   width: 100%
 }
 
+nav .logo-container h1{
+  color: #9b5de5;
+  font-family: 'Cormorant SC', serif;
+}
+
 /* ----Home------ */
 .overlay {
   width: 100vw;
@@ -147,7 +155,7 @@ nav .logo-container .logo {
 
 .home {
   margin-bottom: 15vh;
-  margin-top: 10vh;
+  margin-top: 5vh;
 }
 
 
@@ -747,9 +755,9 @@ nav .logo-container .logo {
 /* -------Result Page ------- */
 .results {
   border-top: solid 1px rgb(213,213,213);
-  /* background-image: url("./images/background.jpeg");
-  background-position: center;
-  background-repeat: no-repeat; */
+  background-image: url("./images/result.jpeg");
+  background-position: right;
+  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
 }
@@ -768,6 +776,10 @@ nav .logo-container .logo {
   border-radius: 10px;
   height: 600px;
   margin-right: 80px;
+}
+
+.filter {
+  background:white
 }
 
 .filter .service {
@@ -890,6 +902,7 @@ nav .logo-container .logo {
   padding:20px;
   border-radius: 10px;
   margin-bottom: 10px;
+  background:white
 }
 
 .results .right-container .result-list .card .picture {
@@ -1148,7 +1161,6 @@ nav .logo-container .logo {
   padding:20px;
   width: 500px;
   height: 100px;
-  vertical-align: top;
   border-radius: 10px;
 }
 
@@ -1184,6 +1196,14 @@ nav .logo-container .logo {
   margin-top: 10px;
 }
 
+.review .review-box textarea {
+  font-size: 20px;
+  padding:20px;
+  width: 500px;
+  height: 100px;
+  border-radius: 10px;
+}
+
 .review .review-title {
   display: flex;
   justify-content: space-between;
@@ -1211,3 +1231,27 @@ nav .logo-container .logo {
   z-index: 999;
 }
   
+
+/* -------About------- */
+.about {
+  background-image: url('./images//about.jpeg');
+  background-position: left;
+  background-repeat: no-repeat;
+}
+
+.about .main h1{
+  color: #9b5de5;
+  font-weight: 500;
+}
+
+.about .main {
+  width: 600px;
+  margin: auto;
+  padding:40px
+}
+
+.about .main p{
+  font-size: 30px;
+  text-align: left;
+  margin-bottom: 60px;
+}

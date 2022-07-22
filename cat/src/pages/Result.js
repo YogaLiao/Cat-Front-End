@@ -34,7 +34,7 @@ function Result({ accessToken, userSignedIn, setAccessToken, setUserSignedIn, se
         axios.get(process.env.REACT_APP_API_URL + endpoint)
             .then(data => {
                 let info = data.data.filter(x => {
-                    return (x.username !== userSignedIn && x.zipcode.slice(0,3) === zipcode.slice(0,3) && x.rate <= rate)
+                    return (x.username !== userSignedIn && x.zipcode.slice(0,2) === zipcode.slice(0,2) && x.rate <= rate)
                 })
                 console.log(info)
                 let result = []

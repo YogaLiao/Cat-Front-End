@@ -15,6 +15,7 @@ function ServicePanel({userSignedIn, accessToken}) {
   const [serviceInfo, setServiceInfo] = useState([])
   const [types, setTypes] = useState([])
 
+  // eslint-disable-next-line
   const [type, setType] = useState("")
   const [disabledDays, setDisabledDays] = useState([])
 
@@ -74,7 +75,7 @@ function ServicePanel({userSignedIn, accessToken}) {
 
     const handleChange = (e) => {
     setType(e.target.value)
-    const filteredData = serviceInfo.filter(x => x.service === type)
+    const filteredData = serviceInfo.filter(x => x.service === e.target.value)
     const disable = filteredData[0].disable
       let copy = []
       // eslint-disable-next-line

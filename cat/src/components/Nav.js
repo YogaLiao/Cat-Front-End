@@ -5,10 +5,11 @@ import { AiOutlineHeart } from 'react-icons/ai'
 import { IoMdArrowDropdown } from 'react-icons/io'
 import SearchForm from './SearchForm'
 import Dropdown from './Dropdown'
-import { useNavigate, Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 function Nav({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
   const navigate = useNavigate()
+  userSignedIn = localStorage.getItem('user')
   const [userSearch, setUserSearch] = useState(false)  
   const [dropdown, setDropdown] = useState(false);
   
@@ -28,9 +29,11 @@ function Nav({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, show
   }
 
   const handleSitter = () => {
-    userSignedIn
-      ? navigate('/add')
-      : setShowModal(true)
+    if (userSignedIn) {
+      navigate('/add')
+      window.location.reload(false)
+    }
+      else setShowModal(true)
   }
 
     return (
@@ -43,7 +46,7 @@ function Nav({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, show
             <div className='mid-container'>
                 <h3 onClick = {handleSearch}><BiSearch /> Search Sitters&nbsp;&nbsp;</h3>
                 <h3 onClick = {handleSitter}><AiOutlineHeart /> Become a Sitter&nbsp;&nbsp;</h3>
-                <Link to="/about"><h3><BiMessageAltCheck /> About Us</h3></Link>
+                <a href="/about"><h3><BiMessageAltCheck /> About Us</h3></a>
             </div>
             <div className='nav-buttons'>
             {userSignedIn ? null :  <button

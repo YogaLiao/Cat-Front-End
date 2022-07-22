@@ -144,7 +144,7 @@ console.log(userId)
     }
     }
         
-console.log(formData.service)
+console.log(formData.disable)
 
   return (
       <div className="add-service">

@@ -2,6 +2,7 @@ import React from 'react'
 import Nav from '../components/Nav'
 
 function About({ userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
+    userSignedIn = localStorage.getItem('user')
   return (
       <div className='about'>
           <Nav

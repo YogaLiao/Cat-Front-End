@@ -10,14 +10,16 @@ function EditService({ id, setEdit, accessToken, userSignedIn }) {
     console.log(localStorage)
     const endpoint = `services/${id}`
     console.log(endpoint)
-    const [networkErrMsg, setNetworkErrMsg] = useState(null)
+  const [networkErrMsg, setNetworkErrMsg] = useState(null)
+  const format = "YYYY/MM/DD"
 
   const statusCodeToErr = (responseObj) => {
       setNetworkErrMsg(`Network Error of code: ${responseObj.status}`)
       // TODO - console log the err message
   }
-    const [serviceDetail, setServiceDetail] = useState([])
-    const [dates,setDates] = useState([])
+    const [serviceDetail, setServiceDetail] = useState()
+
+  const [date, setDate] = useState([])
 
     const getData = () => {
         axios.get(process.env.REACT_APP_API_URL + endpoint)
@@ -25,12 +27,17 @@ function EditService({ id, setEdit, accessToken, userSignedIn }) {
             setServiceDetail(data.data)
             let copy = []
             data.data.disable.map(x => copy.push(new Date(x)))
-            setDates(copy)
+          setDate(copy)
+          console.log(copy)
+          setDates(copy)
         })
     }
     useEffect(() => {getData()
     // eslint-disable-next-line
     }, [])
+  console.log(date)
+  const [dates, setDates] = useState(date)
+  console.log(dates)
     
     const handleChange = (e) => {
         setServiceDetail(((prevState) => ({
@@ -38,22 +45,35 @@ function EditService({ id, setEdit, accessToken, userSignedIn }) {
             [e.target.name]: e.target.value
           })))
     }
+  
+  const handleDates = (e) => {
+    let copy = []
+    e.map(x => copy.push(x.format()))
+    console.log(copy)
+    setServiceDetail({ ...serviceDetail, disable: copy })
+  }
     const handleSubmit = (e) => {
         e.preventDefault()
         setNetworkErrMsg(null)
         console.log(dates)
           console.log("submitted")
-          console.log(serviceDetail)
+      console.log(serviceDetail)
+      // console.log((dates[0].getDay()))
           // console.log(dates[0].format())
           // console.log(dates[1].format())
-      let dateCopy = []
+      // let dateCopy = []
       // eslint-disable-next-line
-          dates.map(date => {
-            date = new Date(date)
-            date = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDay()}`;
-            dateCopy.push(date)
-          })
-          setServiceDetail({ ...serviceDetail, disable: dateCopy })
+          // dates.map(date => {
+            // let d = new Date(date)
+            // console.log(d)
+            // let copy = `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
+      //       let copy = date.format()
+      //       dateCopy.push(copy)
+      //     })
+      // console.log(dateCopy)
+      // console.log(typeof (dateCopy[0]))
+      // console.log(serviceDetail.disable)
+      //     setServiceDetail({ ...serviceDetail, disable: dateCopy })
           console.log(serviceDetail)
           const apiUrl = process.env.REACT_APP_API_URL
           console.log(`fetching with token ${accessToken}`)
@@ -142,73 +162,94 @@ function EditService({ id, setEdit, accessToken, userSignedIn }) {
       
     }
     console.log(serviceDetail)
-    console.log(dates)
+  // console.log(Date(dates[0]))
+  // console.log(typeof(dates[0])) 
   return (
-      <div className='edit-service'> 
+    <>
+      {!serviceDetail
+        ? "Loading"
+        :
+        <div className='edit-service'>
           <div className='close-icon' onClick={e => setEdit(false)}>ⓧ</div>
           {/* <h2>Edit Your Service</h2> */}
           {(serviceDetail.service === "housesitting") && <h2>House Sitting</h2>}
           {(serviceDetail.service === "boarding") && <h2>Boarding</h2>}
           {(serviceDetail.service === "dropin") && <h2>Drop-in Visits</h2>}
           <form onSubmit={handleSubmit}>
-          <label htmlFor='displayName'>Display name </label>
+            <label htmlFor='displayName'>Display name </label>
             <input
               id="displayName"
               type="text"
               name="displayName"
-            //   placeholder="Display Name as"
+              //   placeholder="Display Name as"
               required={false}
               value={serviceDetail.displayName}
-              onChange = {handleChange}
+              onChange={handleChange}
             />
-          <label htmlFor='headline'>Headline</label>
+            <label htmlFor='headline'>Headline</label>
             <input
               id="headline"
               type="text"
               name="headline"
-            //   placeholder="Your pets home away from home!"
-            //   required={true}
+              //   placeholder="Your pets home away from home!"
+              //   required={true}
               value={serviceDetail.headline}
-              onChange = {handleChange}
-          />
-          <label htmlFor='rate'>Rate ($/each visit)</label>
+              onChange={handleChange}
+            />
+            <label htmlFor='rate'>Rate ($/each visit)</label>
             <input
               id="rate"
               type="number"
               name="rate"
-            required={true}
-            // placeholder="20"
+              required={true}
+              // placeholder="20"
               value={serviceDetail.rate}
-              onChange = {handleChange}
-          />
+              onChange={handleChange}
+            />
           
             <label htmlFor='note'>Special Note</label>
             <input
               id="note"
               type="text"
               name="note"
-            //   placeholder=""
+              //   placeholder=""
               required={false}
               value={serviceDetail.note}
-              onChange = {handleChange}
-              />
+              onChange={handleChange}
+            />
 
-              <label>Dates not available</label>
-              <DatePicker 
+            <label>Dates not available</label>
+            {/* <DatePicker 
                       value={dates}
                       className='date'
+                      
                       onChange={setDates}
                       multiple
                       plugins={[
                         <DatePanel eachDaysInRange />
-                      ]} />
-              <div className='button-group'>
-                  <input className="secondary-button" type="submit" value = "Update" />
-                  <input className="secondary-button" onClick={handleDelete} type="submit" value = "Delete" />
-              </div>
-              </form>
+          ]} /> */}
+            <DatePicker
+              // render={<Icon/>}
+              multiple
+              className='date'
+              value={dates}
+              // selected={dates}
+              format = {format}
+              onChange={handleDates}
+                    
+              // dateFormat="Pp"
+              plugins={[
+                <DatePanel eachDaysInRange />
+              ]}
+            />
+            <div className='button-group'>
+              <input className="secondary-button" type="submit" value="Update" />
+              <input className="secondary-button" onClick={handleDelete} type="submit" value="Delete" />
+            </div>
+          </form>
           
-    </div>
+        </div>}
+      </>
   )
 }
 

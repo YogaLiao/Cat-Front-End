@@ -4,6 +4,7 @@ import Filter from '../components/Filter'
 import axios from 'axios'
 import { Link } from "react-router-dom"
 import Footer from '../components/Footer';
+import ReactStars from "react-rating-stars-component";
 
 function Result({ accessToken, userSignedIn, setAccessToken, setUserSignedIn, setShowModal, showModal, setIsSignUp, isSignUp }) {
     userSignedIn = localStorage.getItem('user')
@@ -86,6 +87,21 @@ function Result({ accessToken, userSignedIn, setAccessToken, setUserSignedIn, se
                                                 <img className="picture" src={x.url} alt='N/A'></img>
                                                 <div className='card-detail'>
                                                     <h1>{x.first_name} {x.last_name}</h1>
+                                                    {x.reviews.length > 0
+                                                        ? <div className='result-star'>
+                                                            <ReactStars
+                                                                count={5}
+                                                                value={Number(x.reviews.reduce((r, c) => r + c.rating, 0) / x.reviews.length)}
+                                                                size={24}
+                                                                isHalf={true}
+                                                                emptyIcon={<i className="far fa-star"></i>}
+                                                                halfIcon={<i className="fa fa-star-half-alt"></i>}
+                                                                fullIcon={<i className="fa fa-star"></i>}
+                                                                activeColor="#9b5de5"
+                                                            />
+                                                            <p>{Number(x.reviews.reduce((r, c) => r + c.rating, 0) / x.reviews.length).toFixed(1)}</p>
+                                                        </div>
+                                                    : null}
                                                     <p>{x.headline}</p>
                                                     <h3>{x.city}, {x.state} {x.zipcode}</h3>
                                                     <h3>${x.rate} per visit</h3>

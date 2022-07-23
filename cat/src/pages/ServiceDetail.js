@@ -87,6 +87,7 @@ function ServiceDetail({ accessToken, userSignedIn, setAccessToken, setUserSigne
                 <div className='info'>
                   <p className="name">{serviceInfo.first_name} {serviceInfo.last_name}</p>
                     <p>{serviceInfo.city}, {serviceInfo.state}</p>
+                    <div className='star'>
                     <ReactStars
                         count={5}
                         value={Number(avgRating)}
@@ -96,7 +97,9 @@ function ServiceDetail({ accessToken, userSignedIn, setAccessToken, setUserSigne
                         halfIcon={<i className="fa fa-star-half-alt"></i>}
                         fullIcon={<i className="fa fa-star"></i>}
                         activeColor="#9b5de5"
-                        />
+                      />
+                      <p>{avgRating ? Number(avgRating).toFixed(1) :null}</p>
+                      </div>
                     <button onClick={handleBook} className='primary-button'>Book Now</button>
                 </div>
               </div>

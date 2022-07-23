@@ -906,6 +906,16 @@ nav .logo-container h1{
   background:white
 }
 
+.results .right-container .result-list .card .result-star {
+  display: flex;
+  margin-top: 0;
+}
+
+.results .right-container .result-list .card .result-star p {
+  margin-top: 10px;
+  margin-bottom: 0;
+  margin-left: 5px;
+}
 .results .right-container .result-list .card .picture {
   
   margin-right: 30px;
@@ -929,6 +939,8 @@ nav .logo-container h1{
 
 .results .right-container .result-list .card-detail h1{
   font-family: 'Cormorant SC', serif;
+  margin-top: 0;
+  /* margin-bottom: 0; */
 }
 
 
@@ -1029,6 +1041,11 @@ nav .logo-container h1{
   font-family: 'Cinzel', serif;
 }
 
+.detail .star p {
+  margin-left: 10px;
+  padding-top: 3px;
+}
+
 .detail .top-container .panel .name {
   font-size: 40px;
 }
@@ -1094,6 +1111,12 @@ nav .logo-container h1{
 .detail .list p {
   margin-bottom: 0;
 }
+
+.detail .star {
+  display: flex;
+}
+
+
 
 .booking {
   position: absolute;
